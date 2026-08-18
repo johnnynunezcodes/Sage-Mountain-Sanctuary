@@ -7,6 +7,7 @@ import { Menu, PawPrint } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/mode-toggle"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -118,12 +119,14 @@ export function SiteHeader() {
             </NavigationMenuList>
           </NavigationMenu>
 
+          <ModeToggle />
           <Button render={<Link href="/donate" />} nativeButton={false} className="ml-2">
             Donate
           </Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <ModeToggle />
           <Button render={<Link href="/donate" />} nativeButton={false} size="sm">
             Donate
           </Button>

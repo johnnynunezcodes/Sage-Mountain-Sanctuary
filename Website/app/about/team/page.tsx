@@ -11,18 +11,19 @@ export const metadata: Metadata = {
 
 export default function TeamPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-primary uppercase">About</p>
       <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Meet the Team</h1>
 
       <Alert className="mt-6">
-        <AlertTitle>Placeholder roster</AlertTitle>
+        <AlertTitle>Photos coming soon</AlertTitle>
         <AlertDescription>
-          Replace with the real team&apos;s names, roles, photos, and bios.
+          Team photos aren&apos;t ready yet, so profiles below show initials for now — names,
+          roles, and bios are the real thing.
         </AlertDescription>
       </Alert>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <div className="mt-8 space-y-6">
         {team.map((member) => (
           <Card key={member.name + member.role}>
             <CardHeader className="flex-row items-center gap-4 space-y-0">
@@ -34,7 +35,11 @@ export default function TeamPage() {
                 <CardDescription>{member.role}</CardDescription>
               </div>
             </CardHeader>
-            <CardContent className="text-sm text-muted-foreground">{member.bio}</CardContent>
+            <CardContent className="space-y-3 text-sm text-muted-foreground">
+              {member.bio.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </CardContent>
           </Card>
         ))}
       </div>
