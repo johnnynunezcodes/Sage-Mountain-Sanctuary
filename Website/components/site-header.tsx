@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, PawPrint } from "lucide-react"
+import { Menu } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -50,7 +51,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <PawPrint className="size-5 text-primary" aria-hidden="true" />
+          <Image
+            src="/images/logo.webp"
+            alt="Sage Mountain Sanctuary"
+            width={40}
+            height={40}
+            className="size-9"
+            priority
+          />
           <span>Sage Mountain Sanctuary</span>
         </Link>
 

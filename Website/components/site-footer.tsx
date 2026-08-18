@@ -1,5 +1,6 @@
+import Image from "next/image"
 import Link from "next/link"
-import { Mail, PawPrint } from "lucide-react"
+import { Mail } from "lucide-react"
 
 import { Separator } from "@/components/ui/separator"
 
@@ -10,7 +11,13 @@ export function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-3">
           <div className="space-y-2">
             <div className="flex items-center gap-2 font-semibold">
-              <PawPrint className="size-4 text-primary" aria-hidden="true" />
+              <Image
+                src="/images/logo.webp"
+                alt="Sage Mountain Sanctuary"
+                width={32}
+                height={32}
+                className="size-8"
+              />
               Sage Mountain Sanctuary
             </div>
             <p className="text-sm text-muted-foreground">
