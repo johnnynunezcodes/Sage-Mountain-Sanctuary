@@ -11,10 +11,14 @@
             "id": "da44a3f0be4cb2a6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Animals/Cows.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Cows"
             }
           }
         ]
@@ -181,8 +185,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "f1e145ad3071ac38",
+  "active": "da44a3f0be4cb2a6",
   "lastOpenFiles": [
+    "Animals/_to_delete/geese.txt",
+    "Animals/_to_delete",
+    "Website/public/_to_delete/video.txt",
+    "Website/public/_to_delete/images.txt",
+    "Website/public/_to_delete",
+    "Animals/Geese.md",
+    "Website/public/video.md",
+    "Website/public/images.md",
+    "Animals/Test.md",
+    "Animals/Appendix.md",
+    "Animals/Pigs.md",
+    "Animals/geese.txt",
+    "Animals/Goats.md",
+    "Animals/Sheep.md",
     "Website/public/Untitled.md",
     "Website/public/video.txt",
     "Website/public/images.txt",
@@ -195,11 +213,6 @@
     "Team Members/Lauren-Lockey.md",
     "Team Members/David-Swartz.md",
     "Team Members",
-    "Website/components/ui/sheet.tsx",
-    "Website/components/ui/dialog.tsx",
-    "Website/components/ui/toggle-group.tsx",
-    "Website/components/ui/toggle.tsx",
-    "Website/components/ui/navigation-menu.tsx",
-    "Website/components/ui/alert.tsx"
+    "Website/components/ui/sheet.tsx"
   ]
 }
