@@ -27,15 +27,19 @@ import {
 } from "@/components/ui/sheet"
 
 const visitLinks = [
-  { href: "/events", label: "Events Calendar", description: "Open houses, fundraisers, and community gatherings." },
+  { href: "/events", label: "Events Calendar", description: "Open houses, fundraisers, yoga, and community gatherings." },
   { href: "/visit/tour", label: "Tour", description: "Meet the animals in person on a guided tour." },
-  { href: "/visit/yoga", label: "Yoga", description: "On-site yoga classes alongside the animals." },
   { href: "/visit/volunteer", label: "Volunteer", description: "Join us every Saturday." },
 ]
 
 const aboutLinks = [
-  { href: "/about", label: "Our Story", description: "Mission, history, and philosophy." },
+  { href: "/about", label: "Sage Mountain", description: "Mission, history, and philosophy." },
   { href: "/about/team", label: "Meet the Team", description: "Who runs the sanctuary." },
+  {
+    href: "/about/happenings",
+    label: "Sanctuary Happenings",
+    description: "Rescue stories and updates from around the sanctuary.",
+  },
   { href: "/about/contact", label: "Contact Us", description: "Get in touch." },
 ]
 

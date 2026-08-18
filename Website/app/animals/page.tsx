@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
 import { animals, speciesList } from "@/lib/data/animals"
@@ -39,6 +40,17 @@ export default function AnimalsPage() {
       <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
         Every animal here has a name and a story
       </h1>
+
+      <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl">
+        <Image
+          src="/images/animals/pig/piglets-birthday.jpg"
+          alt="One of the pigs celebrating a birthday with a slice of cake, surrounded by curious chickens"
+          fill
+          sizes="(min-width: 1024px) 1152px, 100vw"
+          className="object-cover"
+          priority
+        />
+      </div>
 
       <Alert className="mt-6">
         <AlertTitle>Real resident roster</AlertTitle>

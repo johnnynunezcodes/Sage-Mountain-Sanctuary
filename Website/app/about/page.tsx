@@ -46,6 +46,9 @@ export default function AboutPage() {
         <Button render={<Link href="/about/team" />} nativeButton={false} variant="outline">
           Meet the Team
         </Button>
+        <Button render={<Link href="/about/happenings" />} nativeButton={false} variant="outline">
+          Sanctuary Happenings
+        </Button>
         <Button render={<Link href="/about/contact" />} nativeButton={false} variant="outline">
           Contact Us
         </Button>

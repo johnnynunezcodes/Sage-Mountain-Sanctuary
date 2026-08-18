@@ -31,9 +31,9 @@ export function SiteFooter() {
             <p className="text-sm font-medium">Explore</p>
             <ul className="space-y-1 text-sm text-muted-foreground">
               <li><Link className="hover:text-foreground" href="/animals">Meet the Animals</Link></li>
-              <li><Link className="hover:text-foreground" href="/visit/tour">Tour Sage Mountain</Link></li>
-              <li><Link className="hover:text-foreground" href="/visit/yoga">Yoga</Link></li>
-              <li><Link className="hover:text-foreground" href="/events">Events</Link></li>
+              <li><Link className="hover:text-foreground" href="/visit/tour">Tour</Link></li>
+              <li><Link className="hover:text-foreground" href="/visit/volunteer">Volunteer</Link></li>
+              <li><Link className="hover:text-foreground" href="/events">Events Calendar</Link></li>
               <li><Link className="hover:text-foreground" href="/donate">Donate</Link></li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import { Flower2, MapPinned, Users } from "lucide-react"
+import { CalendarClock, MapPinned, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 const options = [
   {
     href: "/visit/tour",
-    title: "Tour Sage Mountain",
+    title: "Tour",
     description: "Meet the animals in person and hear their individual rescue stories.",
     icon: MapPinned,
   },
   {
-    href: "/visit/yoga",
-    title: "Yoga",
-    description: "Practice yoga on the sanctuary grounds, often alongside the animals.",
-    icon: Flower2,
+    href: "/events",
+    title: "Events Calendar",
+    description: "Open houses, fundraisers, yoga, and other community gatherings.",
+    icon: CalendarClock,
   },
   {
     href: "/visit/volunteer",
@@ -38,8 +38,8 @@ export default function VisitPage() {
         Come spend time with the animals
       </h1>
       <p className="mt-4 max-w-2xl text-muted-foreground">
-        Whether you're here for a guided tour, a yoga class, or a Saturday shift, every visit
-        supports the sanctuary.
+        Whether you're here for a guided tour, an upcoming event, or a Saturday volunteer shift,
+        every visit supports the sanctuary.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-3">

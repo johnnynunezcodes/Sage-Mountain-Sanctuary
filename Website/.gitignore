@@ -42,4 +42,6 @@ next-env.d.ts
 # Keep them out of the repo entirely.
 *_files/
 public/images/**/*.html
+*.mhtml
+~$*
 
