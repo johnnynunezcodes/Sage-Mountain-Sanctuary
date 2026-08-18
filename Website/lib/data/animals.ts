@@ -526,3 +526,7 @@ export const animals: Animal[] = [
     photoUrl: "/images/animals/chicken/wednesday.jpg",
   },
 ]
+
+export function getAnimalBySlug(slug: string): Animal | undefined {
+  return animals.find((animal) => animal.slug === slug)
+}

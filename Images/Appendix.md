@@ -13,4 +13,7 @@ A handful of additional photos from that same source couldn't be confidently mat
 ## Team
 No real headshots yet — `/about/team` falls back to initials avatars. Add photos here once available and link them from each profile in `../Team Members/`.
 
+## Visit / Volunteer
+A real photo of volunteers petting a pig during a Saturday volunteer day, recovered 2026-08-18 from a saved copy of the live site's Visit page, lives at `Website/public/images/volunteer-day.jpg`. Rendered as the hero image on `/visit/volunteer`.
+
 When you add new images (or markdown files) to this project, add a link or folder note here so future work knows where to find them.

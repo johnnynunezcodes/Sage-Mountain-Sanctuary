@@ -27,7 +27,8 @@ import {
 } from "@/components/ui/sheet"
 
 const visitLinks = [
-  { href: "/visit/tour", label: "Tour Sage Mountain", description: "Meet the animals in person on a guided tour." },
+  { href: "/events", label: "Events Calendar", description: "Open houses, fundraisers, and community gatherings." },
+  { href: "/visit/tour", label: "Tour", description: "Meet the animals in person on a guided tour." },
   { href: "/visit/yoga", label: "Yoga", description: "On-site yoga classes alongside the animals." },
   { href: "/visit/volunteer", label: "Volunteer", description: "Join us every Saturday." },
 ]
@@ -40,7 +41,7 @@ const aboutLinks = [
 
 const simpleLinks = [
   { href: "/animals", label: "Meet the Animals" },
-  { href: "/events", label: "Events" },
+  { href: "/learn", label: "Learn" },
 ]
 
 export function SiteHeader() {
@@ -153,6 +154,9 @@ export function SiteHeader() {
                 <MobileLink href="/animals" onNavigate={() => setOpen(false)}>
                   Meet the Animals
                 </MobileLink>
+                <MobileLink href="/learn" onNavigate={() => setOpen(false)}>
+                  Learn
+                </MobileLink>
                 <p className="mt-3 mb-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                   Visit
                 </p>
@@ -161,9 +165,6 @@ export function SiteHeader() {
                     {item.label}
                   </MobileLink>
                 ))}
-                <MobileLink href="/events" onNavigate={() => setOpen(false)}>
-                  Events
-                </MobileLink>
                 <p className="mt-3 mb-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                   About
                 </p>

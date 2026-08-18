@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -19,6 +20,17 @@ export default function VolunteerPage() {
       <p className="mt-4 text-muted-foreground">
         We welcome volunteers every Saturday to help care for the sanctuary and its animals.
       </p>
+
+      <div className="relative mt-8 aspect-3/2 overflow-hidden rounded-xl">
+        <Image
+          src="/images/volunteer-day.jpg"
+          alt="Volunteers gathered around a pig, petting it during a Saturday volunteer day"
+          fill
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="object-cover"
+          priority
+        />
+      </div>
 
       <Alert className="mt-6">
         <AlertTitle>Preview only</AlertTitle>
