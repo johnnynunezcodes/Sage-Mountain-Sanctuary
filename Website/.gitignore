@@ -34,3 +34,12 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# saved "complete webpage" downloads (e.g. browser Save As > Webpage,
+# Complete). These bundle third-party JS/HTML from whatever site you were
+# viewing and can silently leak that site's API keys if committed - see the
+# GitHub secret-scanning incident from the "Harriet 2"/"Francine" saves.
+# Keep them out of the repo entirely.
+*_files/
+public/images/**/*.html
+
