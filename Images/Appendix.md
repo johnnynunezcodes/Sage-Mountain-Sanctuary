@@ -1,11 +1,16 @@
 # Images
 
-Reference for where visual assets live in this project. **No real photos have been added yet** — the website currently uses colored placeholder blocks instead of real animal/sanctuary photos.
+Reference for where visual assets live in this project. All real photos referenced below live under `Website/public/images/` — that's the actual source the site renders from via `next/image`; nothing is duplicated into this `Images/` directory itself.
 
-## Logos
-`Logos/` — empty. Add the sanctuary's logo files here (transparent PNG/SVG preferred) and link them below once available.
+## Logo
+The real Sage Mountain Sanctuary circular logo lives at `Website/public/images/logo.webp`. Documented in `../Branding/Logos.md`, and rendered in the site header/footer.
 
 ## Animals
-`Animals/` — empty. Add real animal photos here, ideally named to match the animal (e.g. `clementine-1.jpg`), and reference them from the corresponding profile in `../Animals/`.
+Real animal photos, recovered 2026-08-18 from a saved copy of the live site's "Sponsor our Animal Residents" page, live at `Website/public/images/animals/<species>/<slug>.<ext>` (e.g. `Website/public/images/animals/cow/francis.jpg`). About half the current roster (see `../Animals/Appendix.md`) has a confirmed, name-matched photo so far — the rest don't have one yet.
+
+A handful of additional photos from that same source couldn't be confidently matched to a specific animal by filename alone (generic sanctuary shots, unlabeled piglets, an unrecognized "Larry the goat," etc.). Those live in `Website/public/images/animals/unsorted/` for manual review/curation later — check them against the live site or ask the sanctuary before attributing any of them to a specific profile.
+
+## Team
+No real headshots yet — `/about/team` falls back to initials avatars. Add photos here once available and link them from each profile in `../Team Members/`.
 
 When you add new images (or markdown files) to this project, add a link or folder note here so future work knows where to find them.

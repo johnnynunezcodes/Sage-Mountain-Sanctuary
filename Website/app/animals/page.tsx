@@ -8,7 +8,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 export default function AnimalsPage() {
-  const [filter, setFilter] = React.useState("all")
+  const [filterValues, setFilterValues] = React.useState<string[]>(["all"])
+  const filter = filterValues[0] ?? "all"
 
   const visible =
     filter === "all" ? animals : animals.filter((animal) => animal.species === filter)
@@ -23,17 +24,16 @@ export default function AnimalsPage() {
       </h1>
 
       <Alert className="mt-6">
-        <AlertTitle>Placeholder profiles</AlertTitle>
+        <AlertTitle>Real resident roster</AlertTitle>
         <AlertDescription>
-          One example animal per species below. Real bios and photos will replace these before
-          launch.
+          Bios and stories are the sanctuary&apos;s real animals, pulled from the live site. About
+          half have a confirmed photo so far — the rest are still &quot;coming soon.&quot;
         </AlertDescription>
       </Alert>
 
       <ToggleGroup
-        type="single"
-        value={filter}
-        onValueChange={(value) => value && setFilter(value)}
+        value={filterValues}
+        onValueChange={(value) => setFilterValues(value.length ? value : ["all"])}
         variant="outline"
         className="mt-8 flex-wrap justify-start"
       >

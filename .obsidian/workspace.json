@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Branding/Logos.md",
+                "file": "Animals/Pigs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Logos"
+              "title": "Pigs"
             }
           }
         ]
@@ -185,25 +185,33 @@
       "bases:Create new base": false
     }
   },
-  "active": "f1e145ad3071ac38",
+  "active": "da44a3f0be4cb2a6",
   "lastOpenFiles": [
-    "Branding/_to_delete/Logos.md.b64",
-    "Branding/_to_delete",
-    "Website/components/_to_delete/site-header.tsx.b64",
-    "Website/components/_to_delete/site-footer.tsx.b64",
-    "Website/components/_to_delete",
-    "Website/public/images/_to_delete/SageMountain-HealthPlanetAnimals@2x-720x684-1-720x684+(1).webp",
-    "Website/public/images/_to_delete",
-    "Website/public/images/logo.webp",
-    "Website/public/images/SageMountain-HealthPlanetAnimals@2x-720x684-1-720x684+(1).webp",
-    "Website/public/images",
-    "Website/public",
-    "Website/New Folder With Items/public",
-    "Website/New Folder With Items",
-    "Branding/Appendix.md",
+    "Website/public/images/home-hero.jpg",
+    "Website/public/images/animals/chicken/abigail.jpg",
+    "Website/public/images/animals/chicken/wednesday.jpg",
+    "Website/public/images/animals/chicken/ezekiel.jpg",
+    "Website/public/images/animals/chicken/ariana-grande-2.jpg",
+    "Website/public/images/animals/chicken/rosaline.jpg",
+    "Website/public/images/animals/chicken/delhi.jpg",
+    "Website/public/images/animals/chicken/walter.jpg",
+    "Website/public/images/animals/chicken/steve.jpg",
+    "Website/public/images/animals/chicken/thumbnail_image_123650291.jpg",
+    "Website/public/images/animals/chicken/sally.jpg",
+    "Website/public/images/animals/chicken/sally.jpg.html",
+    "Website/public/images/animals/chicken/steve.jpg_files/website.components.socialLinks.styles.css",
+    "Website/public/images/animals/chicken/steve.jpg_files/widget.js",
+    "Website/public/images/animals/chicken/steve.jpg_files/website.components.socialLinks.visitor.js",
+    "Website/public/images/animals/chicken/steve.jpg_files/website.components.html.visitor.js",
+    "Website/public/images/animals/chicken/steve.jpg_files/website.components.html.styles.css",
+    "Website/public/images/animals/chicken/steve.jpg_files/visitor-site-error-reporter-976d22448e700b77-min.en-US.js",
+    "Website/public/images/animals/chicken/steve.jpg_files/user-account-core-433d5f055f1af432-min.en-US.css",
+    "Website/public/images/animals/chicken/steve.jpg_files/user-account-core-e3f360d3dfe5b810-min.en-US.js",
+    "Website/public/images/animals/chicken/steve.jpg_files/static.css",
+    "Policies/Appendix.md",
     "Branding/Logos.md",
+    "Branding/Appendix.md",
     "Animals/Cows.md",
-    "Logos",
     "Animals/Geese.md",
     "Website/public/video.md",
     "Website/public/images.md",

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { CalendarDays, HandHeart, PawPrint } from "lucide-react"
 
@@ -35,8 +36,15 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="flex aspect-4/3 items-center justify-center rounded-xl bg-muted text-sm text-muted-foreground">
-            Hero photo coming soon
+          <div className="relative aspect-4/3 overflow-hidden rounded-xl">
+            <Image
+              src="/images/home-hero.jpg"
+              alt="A visitor feeding one of the sanctuary's pigs in a mountain pasture"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
 
