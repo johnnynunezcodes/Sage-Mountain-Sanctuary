@@ -47,4 +47,7 @@ Added 2026-08-19: real content for a new Sanctuary Happenings post at `/about/ha
 ## Events page header
 Added 2026-08-19: the `/events` page header now shows a landscape photo of Ponyboy the pig next to the "Upcoming events" title, replacing the "Placeholder events" alert box. Source is the user's own full-resolution photo at `Website/public/images/animals/pig/Ponyboy-Pig.jpg` (6838×5169, 13MB, dropped directly into the pig folder on their machine). Since that's far too large for a page thumbnail, it was resized to 2000px wide and re-compressed (JPEG quality 85, ~500KB) and saved to `Website/public/images/events/ponyboy-pig.jpg`, matching the existing `events/` folder convention (see `Animal-Sponsor-Auction.jpg` above). The original full-res file is left untouched in `pig/`.
 
+## Learn page header
+Added 2026-08-19: the `/learn` page header now shows a portrait photo (a visitor nose-to-nose with a cow over a balcony railing, snowy mountains behind) to the right of the title and intro text. Source is the user's own full-resolution photo at `Website/public/images/animals/cow/bradley+smoochhh+sky+2.jpg` (2500×3238, dropped directly into the cow folder on their machine). Resized to 1200px wide (JPEG quality 85, ~280KB) and saved to `Website/public/images/animals/cow/bradley-smooch-sky.jpg`. The original full-res file is left untouched alongside it.
+
 When you add new images (or markdown files) to this project, add a link or folder note here so future work knows where to find them.

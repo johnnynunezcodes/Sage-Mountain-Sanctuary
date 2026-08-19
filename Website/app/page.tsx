@@ -12,38 +12,45 @@ export default function Home() {
 
   return (
     <div>
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold tracking-wide text-primary uppercase">
-              Park City, Utah
-            </p>
-            <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
-              A safe home for rescued farm animals
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Sage Mountain Sanctuary gives rescued pigs, cows, chickens, goats, sheep, and
-              turkeys a lifelong home — and invites you to meet them through guided tours, yoga
-              classes, and volunteer days.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button render={<Link href="/donate" />} nativeButton={false} size="lg">
-                Donate Now
-              </Button>
-              <Button render={<Link href="/animals" />} nativeButton={false} size="lg" variant="outline">
-                Meet the Animals
-              </Button>
+      <section className="relative h-[520px] w-full sm:h-[600px] lg:h-[680px]">
+        <Image
+          src="/images/home-hero.jpg"
+          alt="A visitor feeding one of the sanctuary's pigs in a mountain pasture"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent sm:bg-gradient-to-r sm:from-black/90 sm:via-black/55 sm:to-transparent" />
+        <div className="absolute inset-0 flex items-end sm:items-center">
+          <div className="mx-auto w-full max-w-6xl px-4 pb-10 sm:px-6 sm:pb-0">
+            <div className="max-w-lg">
+              <p className="text-sm font-semibold tracking-wide text-white/90 uppercase">
+                Park City, Utah
+              </p>
+              <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                A safe home for rescued farm animals
+              </h1>
+              <p className="mt-4 text-lg text-white/90">
+                Sage Mountain Sanctuary gives rescued pigs, cows, chickens, goats, sheep, and
+                turkeys a lifelong home — and invites you to meet them through guided tours, yoga
+                classes, and volunteer days.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button render={<Link href="/donate" />} nativeButton={false} size="lg">
+                  Donate Now
+                </Button>
+                <Button
+                  render={<Link href="/animals" />}
+                  nativeButton={false}
+                  size="lg"
+                  variant="outline"
+                  className="border-white/60 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                >
+                  Meet the Animals
+                </Button>
+              </div>
             </div>
-          </div>
-          <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-            <Image
-              src="/images/home-hero.jpg"
-              alt="A visitor feeding one of the sanctuary's pigs in a mountain pasture"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              priority
-            />
           </div>
         </div>
       </section>
