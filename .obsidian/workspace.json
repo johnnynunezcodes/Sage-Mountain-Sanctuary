@@ -187,6 +187,9 @@
   },
   "active": "da44a3f0be4cb2a6",
   "lastOpenFiles": [
+    "Website/public/images/sage-mountain-tagline.png",
+    "Website/public/images/logo-badge-dark-tight.png",
+    "Website/public/images/logo-mark-tight.png",
     "Branding/Logo Assets/Appendix.md",
     "Branding/Logo Assets/variant-wordmark-cream-crop.png",
     "Branding/Logo Assets/variant-wordmark-brown-crop.png",
@@ -196,8 +199,6 @@
     "Branding/Logo Assets/variant-circle-badge-cream.png",
     "Branding/Logo Assets/variant-nav-outline-dark.png",
     "Branding/Logo Assets/variant-nav-outline-light.png",
-    "Branding/Logo Assets/piece-wordmark-cream.png",
-    "Branding/Logo Assets/piece-wordmark-brown.png",
     "Branding/Logo Assets",
     "Website/components/ui/slider.tsx",
     "Website/components/event-detail-dialog.tsx",
