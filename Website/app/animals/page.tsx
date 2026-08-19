@@ -17,17 +17,26 @@ export default function AnimalsPage() {
   // only one section is open at a time, accordion-style.
   const [openSection, setOpenSection] = React.useState<string>(speciesList[0]?.id ?? "")
   const sectionRefs = React.useRef<Record<string, HTMLDivElement | null>>({})
-  const isFirstRender = React.useRef(true)
+  // Set only by handleToggle, right before it changes openSection — this is
+  // what tells the effect below "a user just clicked a section header, go
+  // ahead and scroll." Without this flag the effect can't reliably tell a
+  // real toggle apart from the initial mount: a ref-based "is this the first
+  // render" check gets defeated by React Strict Mode, which double-invokes
+  // effects in development and consumes a naive first-render guard before
+  // the real effect ever runs.
+  const pendingScroll = React.useRef(false)
 
-  // When a section opens, scroll it to the top of the viewport (just below
-  // the sticky header) instead of leaving it wherever the accordion layout
-  // shift happened to land it. Skip this on the initial render so landing on
-  // the page doesn't immediately jump past the hero image and filters.
+  function handleToggle(id: string, isOpen: boolean) {
+    pendingScroll.current = true
+    setOpenSection(isOpen ? "" : id)
+  }
+
+  // When a section opens from a click, scroll it to the top of the viewport
+  // (just below the sticky header) instead of leaving it wherever the
+  // accordion layout shift happened to land it.
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
+    if (!pendingScroll.current) return
+    pendingScroll.current = false
     if (!openSection) return
     sectionRefs.current[openSection]?.scrollIntoView({
       behavior: "smooth",
@@ -94,7 +103,7 @@ export default function AnimalsPage() {
               >
                 <button
                   type="button"
-                  onClick={() => setOpenSection(isOpen ? "" : s.id)}
+                  onClick={() => handleToggle(s.id, isOpen)}
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left"
                 >
