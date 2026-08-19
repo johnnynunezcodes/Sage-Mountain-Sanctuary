@@ -46,14 +46,7 @@ export function SiteFooter() {
                 alt="Sage Mountain Sanctuary"
                 width={614}
                 height={606}
-                className="h-[38px] w-auto dark:hidden"
-              />
-              <Image
-                src="/images/logo-badge-dark-tight.png"
-                alt="Sage Mountain Sanctuary"
-                width={614}
-                height={606}
-                className="hidden h-[38px] w-auto dark:block"
+                className="h-[38px] w-auto"
               />
               <div className="mt-0.5 flex flex-col gap-0.5">
                 <span className="font-heading text-base leading-none font-semibold">Sage Mountain</span>
