@@ -34,7 +34,7 @@ export default function VolunteerPage() {
         <TabsContent value="day" className="mt-6">
           <div className="relative aspect-3/2 overflow-hidden rounded-xl">
             <Image
-              src="/images/volunteer-day.jpg"
+              src="/volunteer-day.jpg"
               alt="Volunteers gathered around a pig, petting it during a Saturday volunteer day"
               fill
               sizes="(min-width: 768px) 768px, 100vw"
@@ -73,7 +73,7 @@ export default function VolunteerPage() {
         <TabsContent value="shifts" className="mt-6">
           <div className="relative aspect-3/2 overflow-hidden rounded-xl">
             <Image
-              src="/images/volunteer-2.jpg"
+              src="/images/Volunteers/volunteer-2.jpg"
               alt="A volunteer feeding the sanctuary's pigs and goats from a bucket, with the mountains behind her"
               fill
               sizes="(min-width: 768px) 768px, 100vw"

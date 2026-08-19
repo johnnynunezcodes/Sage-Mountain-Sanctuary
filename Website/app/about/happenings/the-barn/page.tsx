@@ -69,25 +69,25 @@ const testimonials = [
     quote:
       "In previous years there's been snow drifts high enough to block the animals in their shelters. So the volunteers have to dig them out. It's a lot of work for volunteers and it's very stressful for the animals. The Barn would eliminate that struggle completely since everyone can stay inside during the harsh winter storms.",
     attribution: "Animal Caretaker",
-    image: "/images/volunteers/Volunteer-caretaker.jpg",
+    image: "/images/Volunteers/Volunteer-caretaker.jpg",
   },
   {
     quote:
       "I often miss doing yoga at Sage Mountain during the winter season. Having a space like The Barn will allow for them to host their Wine Down Yoga classes all year instead of just when it's nice outside.",
     attribution: "Visitor",
-    image: "/images/volunteers/yoga-group.jpg",
+    image: "/images/Volunteers/yoga-group.jpg",
   },
   {
     quote:
       "The Barn will be perfect for the rescued animal residents to stay out of the heat when it gets really hot in the summer.",
     attribution: "Volunteer",
-    image: "/images/volunteers/Volunteer-Kylie.jpg",
+    image: "/images/Volunteers/Volunteer-Kylie.jpg",
   },
   {
     quote:
       "There's been times in the winter where the fence to the main yard gets buried in snow. So we put a temporary fence on top of that fence. And then that fence gets buried in snow too. The Barn would prevent that from being problematic since everyone can stay indoors when it's bad outside.",
     attribution: "Volunteer",
-    image: "/images/volunteers/Regular-Volunteer.jpg",
+    image: "/images/Volunteers/Regular-Volunteer.jpg",
   },
 ]
 

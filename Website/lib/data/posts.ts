@@ -53,7 +53,7 @@ export const posts: SanctuaryPost[] = [
     slug: "example-project-update",
     title: "Example Post: Sanctuary Project Update",
     date: "June 2026",
-    image: "/images/events/Animal-Sponsor-Auction.jpg",
+    image: "/images/Events/Animal-Sponsor-Auction.jpg",
     excerpt:
       "Placeholder post — an example update on an ongoing sanctuary project, like a barn build or fencing project. Replace with real details.",
     body:

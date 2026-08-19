@@ -16,7 +16,7 @@ export default function EventsPage() {
       <div className="grid items-center gap-8 sm:grid-cols-2">
         <div className="relative aspect-4/3 overflow-hidden rounded-xl">
           <Image
-            src="/images/events/ponyboy-pig.jpg"
+            src="/images/Events/ponyboy-pig.jpg"
             alt="Ponyboy the pig looking up at the sky in a pasture at the sanctuary"
             fill
             sizes="(min-width: 640px) 400px, 100vw"
