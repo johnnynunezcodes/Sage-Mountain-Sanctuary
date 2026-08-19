@@ -11,3 +11,5 @@ It's a circular badge mark — cream background, a moss-green ring, a line-drawn
 **In use**: this is now rendered in the site header and footer (`Website/components/site-header.tsx`, `Website/components/site-footer.tsx`) in place of the placeholder paw-print icon.
 
 If additional logo variants are added later (a horizontal lockup, a reversed/white version for dark backgrounds, a square favicon crop, etc.), save them alongside the original in `Website/public/images/` with clear filenames and note them here.
+
+**Logo pieces for building new variations**: see [Logo Assets](Logo%20Assets/Appendix.md) — a reference kit of the barn outline, ring/circle frame, and wordmark isolated as separate transparent-background pieces (plus every finished variant built from them), so a new combination doesn't require re-deriving these from the original file each time.

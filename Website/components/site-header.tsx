@@ -69,7 +69,20 @@ export function SiteHeader() {
             className="hidden h-11 w-auto dark:block"
             priority
           />
-          <span className="font-heading">Sage Mountain</span>
+          <Image
+            src="/images/sage-mountain-wordmark.png"
+            alt="Sage Mountain"
+            width={501}
+            height={93}
+            className="h-7 w-auto dark:hidden"
+          />
+          <Image
+            src="/images/sage-mountain-wordmark-dark.png"
+            alt="Sage Mountain"
+            width={501}
+            height={93}
+            className="hidden h-7 w-auto dark:block"
+          />
         </Link>
 
         <div className="hidden lg:flex lg:items-center lg:gap-2">

@@ -55,7 +55,20 @@ export function SiteFooter() {
                 height={358}
                 className="hidden h-9 w-auto dark:block"
               />
-              <span className="font-heading">Sage Mountain</span>
+              <Image
+                src="/images/sage-mountain-wordmark.png"
+                alt="Sage Mountain"
+                width={501}
+                height={93}
+                className="h-6 w-auto dark:hidden"
+              />
+              <Image
+                src="/images/sage-mountain-wordmark-dark.png"
+                alt="Sage Mountain"
+                width={501}
+                height={93}
+                className="hidden h-6 w-auto dark:block"
+              />
             </div>
             <p className="text-sm text-muted-foreground">
               A 501(c)(3) nonprofit animal sanctuary near Park City, Utah.
