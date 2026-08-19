@@ -124,7 +124,10 @@ function SponsorCard({ defaultAnimal }: { defaultAnimal?: string }) {
       <CardContent className="flex flex-col gap-6">
         <div>
           <Label className="mb-2 block">Animal</Label>
-          <Select value={animalSlug} onValueChange={setAnimalSlug}>
+          <Select
+            value={animalSlug}
+            onValueChange={(value) => setAnimalSlug(value ?? animals[0]?.slug ?? "")}
+          >
             <SelectTrigger className="w-full sm:w-64">
               <SelectValue placeholder="Choose an animal" />
             </SelectTrigger>
