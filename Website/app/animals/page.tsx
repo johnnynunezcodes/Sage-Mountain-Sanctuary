@@ -42,6 +42,15 @@ export default function AnimalsPage() {
         />
       </div>
 
+      <p className="mt-10 text-sm font-semibold tracking-wide text-primary uppercase">
+        Sponsorship
+      </p>
+      <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Sponsor an animal</h2>
+      <p className="mt-3 max-w-2xl text-muted-foreground">
+        Sponsoring an animal means committing to a monthly or bi-weekly gift that goes toward
+        their care — browse by species below and pick who you&apos;d like to support.
+      </p>
+
       <div className="mt-8 grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
         <nav className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-2 md:sticky md:top-20 md:mx-0 md:flex-col md:gap-0.5 md:overflow-visible md:px-0 md:pb-0">
           {sidebarItems.map((item) => (
