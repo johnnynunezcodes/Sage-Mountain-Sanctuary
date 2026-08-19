@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { posts } from "@/lib/data/posts"
 import { PostCard } from "@/components/post-card"
+import { FeaturedPostCard } from "@/components/featured-post-card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default function SanctuaryHappeningsPage() {
+  const featured = posts.find((post) => post.featured)
+  const rest = posts.filter((post) => !post.featured)
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-primary uppercase">About</p>
@@ -18,15 +22,22 @@ export default function SanctuaryHappeningsPage() {
       </p>
 
       <Alert className="mt-6">
-        <AlertTitle>Placeholder posts</AlertTitle>
+        <AlertTitle>The Barn is real — the rest are placeholders</AlertTitle>
         <AlertDescription>
-          The posts below are examples showing how this feed will look — replace them with real
+          The featured Barn project below is real content pulled from the live site. The smaller
+          cards after it are examples showing how this feed will look — replace them with real
           updates as they&apos;re written.
         </AlertDescription>
       </Alert>
 
+      {featured && (
+        <div className="mt-8">
+          <FeaturedPostCard post={featured} />
+        </div>
+      )}
+
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
+        {rest.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
       </div>

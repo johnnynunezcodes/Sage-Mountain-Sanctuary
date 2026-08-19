@@ -1,7 +1,8 @@
-// Placeholder Sanctuary Happenings posts — a lightweight news/blog feed for
-// rescue stories, project updates, and other sanctuary news. Replace with
-// real posts as they're written; this file just establishes the shape and
-// UI for the feed.
+// Sanctuary Happenings posts — a lightweight news/blog feed for rescue
+// stories, project updates, and other sanctuary news. Most of these are
+// placeholders (see the "Placeholder post" excerpts below) that establish
+// the shape and UI for the feed. "the-barn" is real content pulled from the
+// live site (sagemtn.org/thebarn) and is pinned to the top via `featured`.
 
 export interface SanctuaryPost {
   slug: string
@@ -9,10 +10,26 @@ export interface SanctuaryPost {
   date: string // human-readable, e.g. "August 12, 2026"
   image?: string
   excerpt: string
-  body: string
+  // Optional full body for posts that use the generic /about/happenings/[slug]
+  // template. Omit when `href` points somewhere else with its own bespoke page.
+  body?: string
+  // Pins this post above the regular grid as a larger, wider card.
+  featured?: boolean
+  // Overrides the default `/about/happenings/${slug}` link — use this when a
+  // post needs a bespoke page instead of the generic template.
+  href?: string
 }
 
 export const posts: SanctuaryPost[] = [
+  {
+    slug: "the-barn",
+    title: "The Barn at Sage Mountain",
+    date: "Capital project · targeting Fall 2025 completion",
+    featured: true,
+    href: "/about/happenings/the-barn",
+    excerpt:
+      "Winters here now bring snow drifts over 10 feet deep. We're building a 7,000 sq ft barn to shelter our 40+ rescued animals from harsh winters and hot summers — see the full plan, cost breakdown, and how to help.",
+  },
   {
     slug: "welcome-to-sanctuary-happenings",
     title: "Welcome to Sanctuary Happenings",

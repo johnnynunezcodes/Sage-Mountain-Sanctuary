@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/card"
 
 export function PostCard({ post }: { post: SanctuaryPost }) {
+  const href = post.href ?? `/about/happenings/${post.slug}`
+
   return (
     <Card className="flex h-full flex-col overflow-hidden py-0">
-      <Link href={`/about/happenings/${post.slug}`} className="contents">
+      <Link href={href} className="contents">
         {post.image ? (
           <div className="relative aspect-3/2">
             <Image
@@ -42,7 +44,7 @@ export function PostCard({ post }: { post: SanctuaryPost }) {
       <CardContent className="text-sm text-muted-foreground">{post.excerpt}</CardContent>
       <CardFooter className="mt-auto pb-4">
         <Link
-          href={`/about/happenings/${post.slug}`}
+          href={href}
           className="text-sm font-medium text-primary underline underline-offset-2 hover:no-underline"
         >
           Read more →

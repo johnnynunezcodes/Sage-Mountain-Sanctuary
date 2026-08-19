@@ -8,6 +8,7 @@ import { animals, speciesList } from "@/lib/data/animals"
 import { AnimalCard } from "@/components/animal-card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { cn } from "@/lib/utils"
 
 export default function AnimalsPage() {
   const [filterValues, setFilterValues] = React.useState<string[]>(["all"])
@@ -66,10 +67,15 @@ export default function AnimalsPage() {
         variant="outline"
         className="mt-8 flex-wrap justify-start"
       >
-        <ToggleGroupItem value="all">All</ToggleGroupItem>
+        <ToggleGroupItem value="all">
+          All <span className="text-muted-foreground">({animals.length})</span>
+        </ToggleGroupItem>
         {speciesList.map((s) => (
           <ToggleGroupItem key={s.id} value={s.id}>
-            {s.label}
+            {s.label}{" "}
+            <span className="text-muted-foreground">
+              ({animals.filter((a) => a.species === s.id).length})
+            </span>
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
@@ -103,9 +109,10 @@ export default function AnimalsPage() {
                   </span>
                   <ChevronDown
                     aria-hidden="true"
-                    className={`size-5 shrink-0 text-muted-foreground transition-transform duration-200 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className={cn(
+                      "size-5 shrink-0 text-muted-foreground transition-transform duration-200",
+                      isOpen && "rotate-180"
+                    )}
                   />
                 </button>
                 {isOpen && (

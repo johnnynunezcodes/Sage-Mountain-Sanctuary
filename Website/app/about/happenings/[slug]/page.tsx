@@ -8,7 +8,10 @@ import { posts, getPostBySlug } from "@/lib/data/posts"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }))
+  // Posts with an `href` override (like "the-barn") have their own bespoke
+  // page elsewhere and must be excluded here, or Next.js would try to
+  // statically generate this generic template at the same path too.
+  return posts.filter((post) => !post.href).map((post) => ({ slug: post.slug }))
 }
 
 export async function generateMetadata({
@@ -32,7 +35,9 @@ export default async function SanctuaryHappeningPage({
 }) {
   const { slug } = await params
   const post = getPostBySlug(slug)
-  if (!post) notFound()
+  // Posts with an `href` override live at their own bespoke page — don't
+  // render this generic template for them even if the slug matches.
+  if (!post || post.href) notFound()
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -71,7 +76,7 @@ export default async function SanctuaryHappeningPage({
         {post.date}
       </p>
 
-      <p className="mt-6 text-muted-foreground">{post.body}</p>
+      {post.body && <p className="mt-6 text-muted-foreground">{post.body}</p>}
     </div>
   )
 }

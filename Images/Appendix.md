@@ -16,4 +16,7 @@ No real headshots yet — `/about/team` falls back to initials avatars. Add phot
 ## Visit / Volunteer
 A real photo of volunteers petting a pig during a Saturday volunteer day, recovered 2026-08-18 from a saved copy of the live site's Visit page, lives at `Website/public/images/volunteer-day.jpg`. Rendered as the hero image on `/visit/volunteer`.
 
+## Visit / Tour
+The `/visit/tour` hero photo (a team member feeding the sanctuary's pigs, sheep, and goats, mountains behind her) lives at `Website/public/images/Staff/Alyssa/volunteer-2.jpg`. Note the path is under a `Staff/Alyssa` folder despite being a tour-page photo, not a headshot — other photo reorganization (a `Staff/` and `Volunteers/` folder structure) was in progress elsewhere in the project when this was added; check those folders for other real photos before assuming something is still a placeholder.
+
 When you add new images (or markdown files) to this project, add a link or folder note here so future work knows where to find them.

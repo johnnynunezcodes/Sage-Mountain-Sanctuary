@@ -49,7 +49,6 @@ export function AnimalCard({ animal }: { animal: Animal }) {
         <Button
           render={<Link href={`/donate?mode=sponsor&animal=${encodeURIComponent(animal.slug)}`} />}
           nativeButton={false}
-          variant="outline"
           className="w-full"
         >
           Sponsor {animal.name}
