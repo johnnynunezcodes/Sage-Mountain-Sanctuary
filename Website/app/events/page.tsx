@@ -13,20 +13,26 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <p className="text-sm font-semibold tracking-wide text-primary uppercase">Events</p>
-      <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Upcoming events</h1>
-      <p className="mt-4 max-w-2xl text-muted-foreground">
-        Open houses, fundraisers, yoga classes, and other community gatherings at the sanctuary.
-        Register below to reserve a spot.
-      </p>
-
-      <Alert className="mt-6">
-        <AlertTitle>Placeholder events</AlertTitle>
-        <AlertDescription>
-          Dates, pricing, and descriptions below are examples — replace with real events.
-          Registration is a UI preview only; no payment processor is connected yet.
-        </AlertDescription>
-      </Alert>
+      <div className="grid items-center gap-8 sm:grid-cols-2">
+        <div className="relative aspect-4/3 overflow-hidden rounded-xl">
+          <Image
+            src="/images/events/ponyboy-pig.jpg"
+            alt="Ponyboy the pig looking up at the sky in a pasture at the sanctuary"
+            fill
+            sizes="(min-width: 640px) 400px, 100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div>
+          <p className="text-sm font-semibold tracking-wide text-primary uppercase">Events</p>
+          <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Upcoming events</h1>
+          <p className="mt-4 text-muted-foreground">
+            Open houses, fundraisers, yoga classes, and other community gatherings at the
+            sanctuary. Register below to reserve a spot.
+          </p>
+        </div>
+      </div>
 
       <EventsCalendar events={events} />
 

@@ -36,23 +36,24 @@ export const posts: SanctuaryPost[] = [
     title: "In Loving Memory of Smooch",
     date: "July 6, 2026",
     href: "/about/happenings/in-loving-memory-of-smooch",
-    image: "/images/smooch/smooch-listing.jpg",
+    image: "/images/smooch/smooch-listing-v2.jpg",
     excerpt:
       "With a heavy heart, we announce that our baby boy Smooch is no longer with us — remembering seven wonderful years of his love and gentleness at Sage Mountain.",
   },
   {
-    slug: "example-new-resident",
-    title: "Example Post: Meet Our Newest Resident",
-    date: "July 2026",
+    slug: "in-loving-memory-of-wilma-jean",
+    title: "In Loving Memory of Wilma Jean",
+    date: "October 16, 2025",
+    href: "/about/happenings/in-loving-memory-of-wilma-jean",
+    image: "/images/wilma-jean/wilma-listing.jpg",
     excerpt:
-      "Placeholder post — a short introduction and rescue story for a recently arrived animal. Replace with a real update once we have one.",
-    body:
-      "Placeholder post — this is a stand-in for the kind of post we'd publish when a new animal arrives: how they came to the sanctuary, what shape they were in, and how they're settling in. Replace with a real story and photos.",
+      "Wilma Jean lived a happy 8 years with us at Sage Mountain alongside her soul mate Ponyboy — remembering our sassy queen, who took her last breath peacefully in August 2025.",
   },
   {
     slug: "example-project-update",
     title: "Example Post: Sanctuary Project Update",
     date: "June 2026",
+    image: "/images/events/Animal-Sponsor-Auction.jpg",
     excerpt:
       "Placeholder post — an example update on an ongoing sanctuary project, like a barn build or fencing project. Replace with real details.",
     body:

@@ -4,32 +4,39 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import type { SanctuaryEvent } from "@/lib/data/events"
-import { tourEvent } from "@/lib/data/events"
 import { EventCard } from "@/components/event-card"
+import { EventDetailDialog } from "@/components/event-detail-dialog"
 import { Button } from "@/components/ui/button"
 import { isSameDay, monthGrid, parseIsoDate, startOfDay } from "@/lib/calendar-utils"
 import { cn } from "@/lib/utils"
 
-// Tours recur every Wednesday, Saturday, and Sunday — see
-// Website/app/visit/tour/tour-booking.tsx, which uses this same rule.
-const TOUR_WEEKDAYS = [0, 3, 6]
-
-function isTourDate(date: Date) {
-  return TOUR_WEEKDAYS.includes(date.getDay())
-}
+// Cap how many event chips a single day cell will render before falling
+// back to a "+N more" hint, so an unusually busy day can't blow out the
+// row height.
+const MAX_VISIBLE_PER_DAY = 4
 
 export function EventsCalendar({ events }: { events: SanctuaryEvent[] }) {
+  // Standing weekly activities (Volunteer Day, Tours) aren't tied to a
+  // single date, so they get their own always-visible summary instead of
+  // showing up in a list of dated events.
+  const recurringEvents = events.filter((event) => event.recurring)
+
   // Freeze "today" once per mount instead of recomputing on every render.
   const [now] = React.useState(() => new Date())
   const today = React.useMemo(() => startOfDay(now), [now])
 
+  // Only one-off events (with an isoDate) plot on a single day — recurring
+  // events are matched by day-of-week in `eventsOn` instead.
   const dated = React.useMemo(
-    () => events.map((event) => ({ event, date: parseIsoDate(event.isoDate) })),
+    () =>
+      events
+        .filter((event) => event.isoDate)
+        .map((event) => ({ event, date: parseIsoDate(event.isoDate!) })),
     [events]
   )
 
   // Default the visible month to whichever month holds the next upcoming
-  // event, so the calendar doesn't open on an empty month.
+  // one-off event, so the calendar doesn't open on an empty month.
   const initialMonthOffset = React.useMemo(() => {
     const next = dated
       .filter((d) => d.date >= today)
@@ -39,25 +46,23 @@ export function EventsCalendar({ events }: { events: SanctuaryEvent[] }) {
   }, [dated, today])
 
   const [monthOffset, setMonthOffset] = React.useState(initialMonthOffset)
-  const [selectedSlug, setSelectedSlug] = React.useState<string | null>(null)
-  const cardRefs = React.useRef<Record<string, HTMLDivElement | null>>({})
 
   const viewDate = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1)
   const cells = monthGrid(viewDate.getFullYear(), viewDate.getMonth())
 
-  function eventOn(date: Date) {
-    return dated.find((d) => isSameDay(d.date, date))?.event
-  }
-
-  function handleSelect(slug: string) {
-    setSelectedSlug(slug)
-    cardRefs.current[slug]?.scrollIntoView({ behavior: "smooth", block: "center" })
+  // All events (one-off or recurring) that land on a given date.
+  function eventsOn(date: Date) {
+    return events.filter((event) => {
+      if (event.isoDate) return isSameDay(parseIsoDate(event.isoDate), date)
+      if (event.recurring) return event.recurring.daysOfWeek.includes(date.getDay())
+      return false
+    })
   }
 
   return (
     <div className="mt-8 flex flex-col gap-8">
-      <div className="rounded-xl border border-border p-4 sm:p-6">
-        <div className="mb-3 flex items-center justify-between">
+      <div className="rounded-xl border border-border p-3 sm:p-6">
+        <div className="mb-3 flex items-center justify-between px-1">
           <p className="text-sm font-medium">Events calendar</p>
           <div className="flex items-center gap-1">
             <Button
@@ -69,7 +74,7 @@ export function EventsCalendar({ events }: { events: SanctuaryEvent[] }) {
             >
               <ChevronLeft />
             </Button>
-            <p className="w-32 text-center text-sm font-medium">
+            <p className="w-28 text-center text-sm font-medium sm:w-32">
               {viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
             </p>
             <Button
@@ -84,75 +89,69 @@ export function EventsCalendar({ events }: { events: SanctuaryEvent[] }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground">
+        <div className="grid grid-cols-7 gap-1 text-center text-[0.65rem] text-muted-foreground sm:text-xs">
           {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
             <div key={i} className="py-1">
               {d}
             </div>
           ))}
         </div>
+
         <div className="grid grid-cols-7 gap-1">
           {cells.map((date, i) => {
             if (!date) return <div key={i} />
-            const event = eventOn(date)
-            const isTour = !event && date >= today && isTourDate(date)
-            const slug = event?.slug ?? (isTour ? tourEvent.slug : undefined)
-            const isSelected = !!slug && selectedSlug === slug
-            const hasDot = !!event || isTour
+            const dayEvents = eventsOn(date)
+            const visible = dayEvents.slice(0, MAX_VISIBLE_PER_DAY)
+            const overflow = dayEvents.length - visible.length
+            const isToday = isSameDay(date, today)
             return (
-              <button
+              <div
                 key={i}
-                type="button"
-                disabled={!slug}
-                onClick={() => slug && handleSelect(slug)}
-                aria-pressed={!!isSelected}
-                title={event?.title ?? (isTour ? tourEvent.title : undefined)}
                 className={cn(
-                  "flex aspect-square flex-col items-center justify-center gap-0.5 rounded-full text-sm transition-colors",
-                  !hasDot && "text-muted-foreground/40",
-                  hasDot && !isSelected && "bg-primary/10 font-medium text-primary hover:bg-primary/20",
-                  isSelected && "bg-primary font-medium text-primary-foreground"
+                  "flex min-h-16 flex-col gap-0.5 rounded-lg border p-1 sm:min-h-28 sm:p-1.5",
+                  isToday ? "border-primary/40 bg-primary/5" : "border-border/60"
                 )}
               >
-                <span>{date.getDate()}</span>
-                {hasDot && (
-                  <span
-                    className={cn(
-                      "size-1 rounded-full",
-                      isSelected ? "bg-primary-foreground" : "bg-primary"
+                <span
+                  className={cn(
+                    "px-0.5 text-[0.7rem] font-medium sm:text-xs",
+                    isToday ? "text-primary" : "text-muted-foreground"
+                  )}
+                >
+                  {date.getDate()}
+                </span>
+                {visible.length > 0 && (
+                  <div className="flex flex-col gap-0.5">
+                    {visible.map((event) => (
+                      <EventDetailDialog key={event.slug} event={event} />
+                    ))}
+                    {overflow > 0 && (
+                      <p className="px-1.5 text-[0.65rem] text-muted-foreground">
+                        +{overflow} more
+                      </p>
                     )}
-                  />
+                  </div>
                 )}
-              </button>
+              </div>
             )
           })}
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">
-          Dates with a dot have an event — tap one to jump to its details below. Highlighted
-          Wednesdays, Saturdays, and Sundays are guided tour dates.
+
+        <p className="mt-3 px-1 text-xs text-muted-foreground">
+          Tap an event on any date to see full details, then book or learn more.
         </p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {[...events, tourEvent].map((event) => (
-          <div
-            key={event.slug}
-            ref={(el) => {
-              cardRefs.current[event.slug] = el
-            }}
-            className={cn(
-              "rounded-xl transition-shadow",
-              selectedSlug === event.slug && "ring-2 ring-primary ring-offset-2 ring-offset-background"
-            )}
-          >
-            {event.slug === tourEvent.slug ? (
-              <EventCard event={event} href="/visit/tour" ctaLabel="View Tour Times" />
-            ) : (
-              <EventCard event={event} />
-            )}
+      {recurringEvents.length > 0 && (
+        <div>
+          <p className="mb-4 text-sm font-medium">Weekly activities</p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {recurringEvents.map((event) => (
+              <EventCard key={event.slug} event={event} />
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

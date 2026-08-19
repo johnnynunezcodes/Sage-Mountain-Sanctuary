@@ -43,10 +43,7 @@ const aboutLinks = [
   { href: "/about/contact", label: "Contact Us", description: "Get in touch." },
 ]
 
-const simpleLinks = [
-  { href: "/animals", label: "Meet the Animals" },
-  { href: "/learn", label: "Learn" },
-]
+const simpleLinks = [{ href: "/animals", label: "Meet the Animals" }]
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -92,7 +89,10 @@ export function SiteHeader() {
                       <li key={item.href}>
                         <NavigationMenuLink
                           render={
-                            <Link href={item.href} className="flex flex-col gap-0.5 rounded-md p-2" />
+                            <Link
+                              href={item.href}
+                              className="flex flex-col items-center gap-0.5 rounded-md p-2 text-center"
+                            />
                           }
                         >
                           <span className="text-sm font-medium">{item.label}</span>
@@ -105,6 +105,12 @@ export function SiteHeader() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
+                <NavigationMenuLink render={<Link href="/learn" />} active={pathname === "/learn"}>
+                  Learn
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
                 <NavigationMenuTrigger>About</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[280px] gap-1 p-2">
@@ -112,7 +118,10 @@ export function SiteHeader() {
                       <li key={item.href}>
                         <NavigationMenuLink
                           render={
-                            <Link href={item.href} className="flex flex-col gap-0.5 rounded-md p-2" />
+                            <Link
+                              href={item.href}
+                              className="flex flex-col items-center gap-0.5 rounded-md p-2 text-center"
+                            />
                           }
                         >
                           <span className="text-sm font-medium">{item.label}</span>
@@ -158,9 +167,6 @@ export function SiteHeader() {
                 <MobileLink href="/animals" onNavigate={() => setOpen(false)}>
                   Meet the Animals
                 </MobileLink>
-                <MobileLink href="/learn" onNavigate={() => setOpen(false)}>
-                  Learn
-                </MobileLink>
                 <p className="mt-3 mb-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                   Visit
                 </p>
@@ -169,6 +175,9 @@ export function SiteHeader() {
                     {item.label}
                   </MobileLink>
                 ))}
+                <MobileLink href="/learn" onNavigate={() => setOpen(false)}>
+                  Learn
+                </MobileLink>
                 <p className="mt-3 mb-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                   About
                 </p>

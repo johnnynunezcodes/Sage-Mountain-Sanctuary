@@ -1,8 +1,8 @@
 import Link from "next/link"
+import Image from "next/image"
 import type { Metadata } from "next"
 
 import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,13 +16,16 @@ export default function AboutPage() {
         Compassion, one rescue at a time
       </h1>
 
-      <Alert className="mt-6">
-        <AlertTitle>Draft copy</AlertTitle>
-        <AlertDescription>
-          The sanctuary&apos;s real founding story and history should replace the copy below —
-          see Programs/Mission &amp; Story.md for notes on what&apos;s still needed.
-        </AlertDescription>
-      </Alert>
+      <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl">
+        <Image
+          src="/images/geese.jpg"
+          alt="A line of geese walking across the sanctuary at dusk, mountains in the background"
+          fill
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="object-cover object-[center_78%]"
+          priority
+        />
+      </div>
 
       <div className="mt-8 space-y-6 text-muted-foreground">
         <p>

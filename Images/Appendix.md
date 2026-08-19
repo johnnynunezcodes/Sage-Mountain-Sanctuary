@@ -33,8 +33,18 @@ Revised 2026-08-19 (later same day): after trying a rotated+cropped crop and the
 
 ## In Loving Memory of Smooch
 Added 2026-08-19: real content for a new Sanctuary Happenings post, replacing the "Welcome to Sanctuary Happenings" placeholder. Source is the live memorial page at `sagemtn.org/media/in-loving-memory-of-smooch` — a fresh fetch of that page was blocked by the site's `robots.txt`, so the photos live at `Website/public/images/smooch/` were cropped from full-resolution screenshots of the live page that the user supplied directly in chat, not downloaded from the site:
-- `smooch-listing.jpg` — the post's listing-card photo (snowy close-up face), used in `lib/data/posts.ts`'s `image` field.
-- `smooch-hero.jpg` — the article header photo (looking-up horns/face shot), used as the hero on `/about/happenings/in-loving-memory-of-smooch`.
+- `smooch-listing-v2.jpg` — the post's listing-card photo, used in `lib/data/posts.ts`'s `image` field. (Supersedes `smooch-listing.jpg`, an earlier close-up crop from a screenshot — the user later dropped a real full-resolution photo, `Smooch-Cow2.jpg`, straight into this folder on their machine and asked for it to replace the listing image; renamed here to dodge Next's dev image cache, which doesn't reliably invalidate when a same-named `public/` file's bytes change.)
+- `smooch-hero-v2.jpg` — the article hero on `/about/happenings/in-loving-memory-of-smooch`. Also superseded an earlier crop for the same cache-busting reason — current version is the sunset pasture photo (`SmootchCow.webp`, provided by the user) cropped to `aspect-4/5`.
 - `smooch-gallery-01.jpg` through `smooch-gallery-12.jpg` — 12 of the live page's 16 gallery photos. The top row of that gallery was cut off in the user's screenshot (page was scrolled past it), so those 4 photos aren't included yet — if the user can send that portion, or once robots.txt allows a fetch, add `smooch-gallery-13.jpg` onward and update the `galleryImages` array in the page.
+- Note: `smooch-listing.jpg` and `smooch-hero.jpg` (the original, non-`v2` filenames) are still sitting in this folder unused — safe to delete by hand.
+
+## In Loving Memory of Wilma Jean
+Added 2026-08-19: real content for a new Sanctuary Happenings post at `/about/happenings/in-loving-memory-of-wilma-jean`, replacing the "Example Post: Meet Our Newest Resident" placeholder. Source is the live memorial page at `sagemtn.org/media/in-loving-memory-of-wilma-jean` and its listing on `sagemtn.org/media` — same as with Smooch, a fresh fetch was blocked by `robots.txt`, so the photos at `Website/public/images/wilma-jean/` were cropped from full-resolution screenshots the user supplied in chat:
+- `wilma-listing.jpg` — the listing-card photo (pig walking in snow), used in `lib/data/posts.ts`'s `image` field.
+- `wilma-hero.jpg` — the article header photo (Wilma Jean with Co-Founder Lauren Lockey), used as the hero on the bespoke page.
+- `wilma-gallery-01.jpg` through `wilma-gallery-08.jpg` — all 8 photos from the live page's gallery, fully captured this time (no cropped/cut-off row).
+
+## Events page header
+Added 2026-08-19: the `/events` page header now shows a landscape photo of Ponyboy the pig next to the "Upcoming events" title, replacing the "Placeholder events" alert box. Source is the user's own full-resolution photo at `Website/public/images/animals/pig/Ponyboy-Pig.jpg` (6838×5169, 13MB, dropped directly into the pig folder on their machine). Since that's far too large for a page thumbnail, it was resized to 2000px wide and re-compressed (JPEG quality 85, ~500KB) and saved to `Website/public/images/events/ponyboy-pig.jpg`, matching the existing `events/` folder convention (see `Animal-Sponsor-Auction.jpg` above). The original full-res file is left untouched in `pig/`.
 
 When you add new images (or markdown files) to this project, add a link or folder note here so future work knows where to find them.

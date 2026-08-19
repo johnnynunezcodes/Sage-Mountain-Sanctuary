@@ -28,18 +28,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-export function EventCard({
-  event,
-  href,
-  ctaLabel = "View Details",
-}: {
-  event: SanctuaryEvent
-  /** When set, the footer links here instead of opening the registration-preview dialog — for events (like recurring tours) that already have a real booking flow elsewhere on the site. */
-  href?: string
-  ctaLabel?: string
-}) {
+export function EventCard({ event }: { event: SanctuaryEvent }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card className="h-full">
       <CardHeader>
         <CardTitle>{event.title}</CardTitle>
         <CardDescription className="flex flex-col gap-1 pt-1">
@@ -60,11 +51,11 @@ export function EventCard({
       <CardContent className="flex-1 text-sm text-muted-foreground">
         {event.description}
       </CardContent>
-      <CardFooter className="flex items-center justify-between">
-        <span className="text-sm font-medium">{event.price}</span>
-        {href ? (
-          <Button render={<Link href={href} />} nativeButton={false}>
-            {ctaLabel}
+      <CardFooter className="flex items-center justify-between gap-3">
+        <span className="flex min-h-10 items-center text-sm font-medium">{event.price}</span>
+        {event.href ? (
+          <Button render={<Link href={event.href} />} nativeButton={false}>
+            {event.ctaLabel ?? "Learn more"}
           </Button>
         ) : (
           <Dialog>

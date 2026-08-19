@@ -6,7 +6,6 @@ import { ChevronDown } from "lucide-react"
 
 import { animals, speciesList } from "@/lib/data/animals"
 import { AnimalCard } from "@/components/animal-card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
 
@@ -52,14 +51,6 @@ export default function AnimalsPage() {
           priority
         />
       </div>
-
-      <Alert className="mt-6">
-        <AlertTitle>Real resident roster</AlertTitle>
-        <AlertDescription>
-          Bios and stories are the sanctuary&apos;s real animals, pulled from the live site. About
-          half have a confirmed photo so far — the rest are still &quot;coming soon.&quot;
-        </AlertDescription>
-      </Alert>
 
       <ToggleGroup
         value={filterValues}

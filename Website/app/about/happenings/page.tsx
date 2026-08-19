@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { posts } from "@/lib/data/posts"
 import { PostCard } from "@/components/post-card"
 import { FeaturedPostCard } from "@/components/featured-post-card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
   title: "Sanctuary Happenings",
@@ -20,15 +19,6 @@ export default function SanctuaryHappeningsPage() {
       <p className="mt-4 max-w-2xl text-muted-foreground">
         Rescue stories, project updates, and other news from around the sanctuary.
       </p>
-
-      <Alert className="mt-6">
-        <AlertTitle>The Barn is real — the rest are placeholders</AlertTitle>
-        <AlertDescription>
-          The featured Barn project below is real content pulled from the live site. The smaller
-          cards after it are examples showing how this feed will look — replace them with real
-          updates as they&apos;re written.
-        </AlertDescription>
-      </Alert>
 
       {featured && (
         <div className="mt-8">

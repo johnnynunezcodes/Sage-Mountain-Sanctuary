@@ -48,7 +48,7 @@ export default function InLovingMemoryOfSmoochPage() {
 
       <div className="relative mt-6 aspect-4/5 overflow-hidden rounded-xl bg-muted">
         <Image
-          src="/images/smooch/smooch-hero.jpg"
+          src="/images/smooch/smooch-hero-v2.jpg"
           alt="Smooch the steer looking toward the camera"
           fill
           sizes="(min-width: 768px) 768px, 100vw"
