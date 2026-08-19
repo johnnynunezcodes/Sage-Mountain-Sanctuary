@@ -12,13 +12,20 @@ export function SiteFooter() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 font-semibold">
               <Image
-                src="/images/logo.webp"
+                src="/images/logo-outline.png"
                 alt="Sage Mountain Sanctuary"
-                width={32}
-                height={32}
-                className="size-8"
+                width={567}
+                height={358}
+                className="h-9 w-auto dark:hidden"
               />
-              Sage Mountain Sanctuary
+              <Image
+                src="/images/logo-outline-dark.png"
+                alt="Sage Mountain Sanctuary"
+                width={567}
+                height={358}
+                className="hidden h-9 w-auto dark:block"
+              />
+              <span className="font-heading">Sage Mountain</span>
             </div>
             <p className="text-sm text-muted-foreground">
               A 501(c)(3) nonprofit animal sanctuary near Park City, Utah.

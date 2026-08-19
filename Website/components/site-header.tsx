@@ -54,14 +54,22 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <Image
-            src="/images/logo.webp"
+            src="/images/logo-outline.png"
             alt="Sage Mountain Sanctuary"
-            width={40}
-            height={40}
-            className="size-9"
+            width={567}
+            height={358}
+            className="h-11 w-auto dark:hidden"
             priority
           />
-          <span>Sage Mountain Sanctuary</span>
+          <Image
+            src="/images/logo-outline-dark.png"
+            alt="Sage Mountain Sanctuary"
+            width={567}
+            height={358}
+            className="hidden h-11 w-auto dark:block"
+            priority
+          />
+          <span className="font-heading">Sage Mountain</span>
         </Link>
 
         <div className="hidden lg:flex lg:items-center lg:gap-2">
