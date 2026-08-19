@@ -17,11 +17,17 @@ export default function AnimalsPage() {
   // only one section is open at a time, accordion-style.
   const [openSection, setOpenSection] = React.useState<string>(speciesList[0]?.id ?? "")
   const sectionRefs = React.useRef<Record<string, HTMLDivElement | null>>({})
+  const isFirstRender = React.useRef(true)
 
   // When a section opens, scroll it to the top of the viewport (just below
   // the sticky header) instead of leaving it wherever the accordion layout
-  // shift happened to land it.
+  // shift happened to land it. Skip this on the initial render so landing on
+  // the page doesn't immediately jump past the hero image and filters.
   React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
     if (!openSection) return
     sectionRefs.current[openSection]?.scrollIntoView({
       behavior: "smooth",
