@@ -110,119 +110,125 @@ export function VolunteerDayRsvp() {
         <CardTitle>RSVP for Volunteer Day</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-8">
-        <div>
-          <p className="mb-3 text-sm font-medium">Next available Saturdays</p>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {upcoming.map((date) => {
-              const isSelected = selectedDate && isSameDay(date, selectedDate)
-              return (
-                <button
-                  key={date.toISOString()}
-                  type="button"
-                  onClick={() => setSelectedDate(date)}
-                  aria-pressed={!!isSelected}
-                  className={cn(
-                    "rounded-xl border p-4 text-left transition-colors",
-                    isSelected
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:bg-muted/50"
-                  )}
-                >
-                  <p className="font-medium">
-                    {date.toLocaleDateString("en-US", { weekday: "long" })}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })} ·
-                    9–11 AM
-                  </p>
-                </button>
-              )
-            })}
-          </div>
-        </div>
+        <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[336px_1fr] lg:items-start lg:gap-6">
+          <div className="flex flex-col gap-8">
+            <div>
+              <p className="mb-3 text-sm font-medium">Next available Saturdays</p>
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {upcoming.map((date) => {
+                  const isSelected = selectedDate && isSameDay(date, selectedDate)
+                  return (
+                    <button
+                      key={date.toISOString()}
+                      type="button"
+                      onClick={() => setSelectedDate(date)}
+                      aria-pressed={!!isSelected}
+                      className={cn(
+                        "rounded-xl border p-4 text-left transition-colors",
+                        isSelected
+                          ? "border-primary bg-primary/5"
+                          : "border-border hover:bg-muted/50"
+                      )}
+                    >
+                      <p className="font-medium">
+                        {date.toLocaleDateString("en-US", { weekday: "long" })}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })} ·
+                        9–11 AM
+                      </p>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
 
-        <div>
-          <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm font-medium">Or pick a Saturday from the calendar</p>
-            <div className="flex items-center gap-1">
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                onClick={() => setMonthOffset((v) => v - 1)}
-                disabled={monthOffset <= 0}
-                aria-label="Previous month"
-              >
-                <ChevronLeft />
-              </Button>
-              <p className="w-32 text-center text-sm font-medium">
-                {viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            {/* Capped to 336px so the day cells stay a fixed size instead of stretching
+                (via aspect-square in a 7-col grid) as the card gets wider on desktop. */}
+            <div className="lg:max-w-[336px]">
+              <div className="mb-3 flex items-center justify-between">
+                <p className="text-sm font-medium">Or pick a Saturday from the calendar</p>
+                <div className="flex items-center gap-1">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={() => setMonthOffset((v) => v - 1)}
+                    disabled={monthOffset <= 0}
+                    aria-label="Previous month"
+                  >
+                    <ChevronLeft />
+                  </Button>
+                  <p className="w-32 text-center text-sm font-medium">
+                    {viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                  </p>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={() => setMonthOffset((v) => v + 1)}
+                    aria-label="Next month"
+                  >
+                    <ChevronRight />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground">
+                {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
+                  <div key={i} className="py-1">
+                    {d}
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 gap-1">
+                {cells.map((date, i) => {
+                  if (!date) return <div key={i} />
+                  const selectable = isSelectable(date, now)
+                  const isSelected = selectedDate && isSameDay(date, selectedDate)
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      disabled={!selectable}
+                      onClick={() => setSelectedDate(date)}
+                      aria-pressed={!!isSelected}
+                      className={cn(
+                        "aspect-square rounded-full text-sm transition-colors",
+                        !selectable && "text-muted-foreground/40",
+                        selectable && !isSelected && "bg-primary/10 font-medium text-primary hover:bg-primary/20",
+                        isSelected && "bg-primary font-medium text-primary-foreground"
+                      )}
+                    >
+                      {date.getDate()}
+                    </button>
+                  )
+                })}
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Highlighted dates are Saturdays — Volunteer Day runs 9–11 AM.
               </p>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                onClick={() => setMonthOffset((v) => v + 1)}
-                aria-label="Next month"
-              >
-                <ChevronRight />
-              </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground">
-            {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
-              <div key={i} className="py-1">
-                {d}
-              </div>
-            ))}
+          <div className="rounded-xl border border-border p-4">
+            <p className="font-medium">
+              {selectedDate ? `${formatDate(selectedDate)} · 9–11 AM` : "Choose a Saturday above"}
+            </p>
+            <div className="mt-4 flex flex-col gap-4">
+              <Stepper label="Adults" hint="18 and older" value={adults} onChange={setAdults} min={0} />
+              <Stepper
+                label="Kids"
+                hint="Must be accompanied by an adult"
+                value={kids}
+                onChange={setKids}
+                min={0}
+              />
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              {adults + kids} {adults + kids === 1 ? "person" : "people"} total.
+            </p>
           </div>
-          <div className="grid grid-cols-7 gap-1">
-            {cells.map((date, i) => {
-              if (!date) return <div key={i} />
-              const selectable = isSelectable(date, now)
-              const isSelected = selectedDate && isSameDay(date, selectedDate)
-              return (
-                <button
-                  key={i}
-                  type="button"
-                  disabled={!selectable}
-                  onClick={() => setSelectedDate(date)}
-                  aria-pressed={!!isSelected}
-                  className={cn(
-                    "aspect-square rounded-full text-sm transition-colors",
-                    !selectable && "text-muted-foreground/40",
-                    selectable && !isSelected && "bg-primary/10 font-medium text-primary hover:bg-primary/20",
-                    isSelected && "bg-primary font-medium text-primary-foreground"
-                  )}
-                >
-                  {date.getDate()}
-                </button>
-              )
-            })}
-          </div>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Highlighted dates are Saturdays — Volunteer Day runs 9–11 AM.
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-border p-4">
-          <p className="font-medium">
-            {selectedDate ? `${formatDate(selectedDate)} · 9–11 AM` : "Choose a Saturday above"}
-          </p>
-          <div className="mt-4 flex flex-col gap-4">
-            <Stepper label="Adults" hint="18 and older" value={adults} onChange={setAdults} min={0} />
-            <Stepper
-              label="Kids"
-              hint="Must be accompanied by an adult"
-              value={kids}
-              onChange={setKids}
-              min={0}
-            />
-          </div>
-          <p className="mt-4 text-xs text-muted-foreground">
-            {adults + kids} {adults + kids === 1 ? "person" : "people"} total.
-          </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">

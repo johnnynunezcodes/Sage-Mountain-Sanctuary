@@ -146,7 +146,7 @@ export function TourBooking() {
 
           {/* Capped to 336px so the day cells stay a fixed size instead of stretching
               (via aspect-square in a 7-col grid) as the card gets wider on desktop. */}
-          <div className="max-w-[336px]">
+          <div className="lg:max-w-[336px]">
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-medium">Or pick a date from the calendar</p>
               <div className="flex items-center gap-1">
