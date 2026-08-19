@@ -3,7 +3,7 @@ import Image from "next/image"
 import { CalendarClock } from "lucide-react"
 
 import { events } from "@/lib/data/events"
-import { EventCard } from "@/components/event-card"
+import { EventsCalendar } from "@/components/events-calendar"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
@@ -28,11 +28,7 @@ export default function EventsPage() {
         </AlertDescription>
       </Alert>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event) => (
-          <EventCard key={event.slug} event={event} />
-        ))}
-      </div>
+      <EventsCalendar events={events} />
 
       <div className="mt-16">
         <div className="relative aspect-21/9 overflow-hidden rounded-xl">

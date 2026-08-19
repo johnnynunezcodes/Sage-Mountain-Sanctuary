@@ -6,30 +6,30 @@ import { ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Separator } from "@/components/ui/separator"
 import { addDays, isSameDay, monthGrid, startOfDay } from "@/lib/calendar-utils"
 import { cn } from "@/lib/utils"
 
-const ADULT_PRICE = 30
-const CHILD_PRICE = 15
-const TOUR_WEEKDAYS = [0, 3, 6] // Sunday, Wednesday, Saturday
-const MIN_LEAD_DAYS = 2 // "must be scheduled at least 48 hours before"
-const MAX_SPOTS = 20 // capacity per tour
+const VOLUNTEER_DAY_WEEKDAY = 6 // Saturday
 
-function isTourDay(date: Date) {
-  return TOUR_WEEKDAYS.includes(date.getDay())
+function isVolunteerDay(date: Date) {
+  return date.getDay() === VOLUNTEER_DAY_WEEKDAY
 }
 
-function isBookable(date: Date, now: Date) {
-  return isTourDay(date) && date >= startOfDay(addDays(now, MIN_LEAD_DAYS))
+function isSelectable(date: Date, now: Date) {
+  return isVolunteerDay(date) && date >= startOfDay(now)
 }
 
-// Next `count` bookable tour dates, in chronological order.
-function getUpcomingTourDates(now: Date, count: number) {
+// Next `count` upcoming Saturdays, in chronological order (today counts if
+// it's a Saturday).
+function getUpcomingVolunteerDays(now: Date, count: number) {
   const dates: Date[] = []
   let cursor = startOfDay(now)
-  // Cap the search so a bug can't spin forever.
   for (let i = 0; dates.length < count && i < 365; i++) {
-    if (isBookable(cursor, now)) dates.push(cursor)
+    if (isSelectable(cursor, now)) dates.push(cursor)
     cursor = addDays(cursor, 1)
   }
   return dates
@@ -46,24 +46,22 @@ function formatDate(date: Date) {
 
 function Stepper({
   label,
-  price,
+  hint,
   value,
   onChange,
   min = 0,
-  max = Infinity,
 }: {
   label: string
-  price: number
+  hint: string
   value: number
   onChange: (value: number) => void
   min?: number
-  max?: number
 }) {
   return (
     <div className="flex items-center justify-between gap-4">
       <div>
         <p className="font-medium">{label}</p>
-        <p className="text-sm text-muted-foreground">${price} each</p>
+        <p className="text-sm text-muted-foreground">{hint}</p>
       </div>
       <div className="flex items-center gap-3">
         <Button
@@ -81,8 +79,7 @@ function Stepper({
           type="button"
           variant="outline"
           size="icon"
-          onClick={() => onChange(Math.min(max, value + 1))}
-          disabled={value >= max}
+          onClick={() => onChange(value + 1)}
           aria-label={`More ${label}`}
         >
           <Plus />
@@ -92,28 +89,29 @@ function Stepper({
   )
 }
 
-export function TourBooking() {
+export function VolunteerDayRsvp() {
   // Freeze "today" once per mount instead of recomputing on every render.
   const [now] = React.useState(() => new Date())
-  const upcoming = React.useMemo(() => getUpcomingTourDates(now, 3), [now])
+  const upcoming = React.useMemo(() => getUpcomingVolunteerDays(now, 3), [now])
 
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(upcoming[0] ?? null)
   const [monthOffset, setMonthOffset] = React.useState(0)
   const [adults, setAdults] = React.useState(1)
   const [kids, setKids] = React.useState(0)
+  const [agreedToWaiver, setAgreedToWaiver] = React.useState(false)
+  const [subscribeToNewsletter, setSubscribeToNewsletter] = React.useState(true)
 
   const viewDate = new Date(now.getFullYear(), now.getMonth() + monthOffset, 1)
   const cells = monthGrid(viewDate.getFullYear(), viewDate.getMonth())
-  const total = adults * ADULT_PRICE + kids * CHILD_PRICE
 
   return (
     <Card className="mt-8">
       <CardHeader>
-        <CardTitle>Book a tour</CardTitle>
+        <CardTitle>RSVP for Volunteer Day</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-8">
         <div>
-          <p className="mb-3 text-sm font-medium">Next available dates</p>
+          <p className="mb-3 text-sm font-medium">Next available Saturdays</p>
           <div className="grid gap-3 sm:grid-cols-3">
             {upcoming.map((date) => {
               const isSelected = selectedDate && isSameDay(date, selectedDate)
@@ -135,7 +133,7 @@ export function TourBooking() {
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {date.toLocaleDateString("en-US", { month: "short", day: "numeric" })} ·
-                    5–6 PM
+                    9–11 AM
                   </p>
                 </button>
               )
@@ -145,7 +143,7 @@ export function TourBooking() {
 
         <div>
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm font-medium">Or pick a date from the calendar</p>
+            <p className="text-sm font-medium">Or pick a Saturday from the calendar</p>
             <div className="flex items-center gap-1">
               <Button
                 type="button"
@@ -182,19 +180,19 @@ export function TourBooking() {
           <div className="grid grid-cols-7 gap-1">
             {cells.map((date, i) => {
               if (!date) return <div key={i} />
-              const bookable = isBookable(date, now)
+              const selectable = isSelectable(date, now)
               const isSelected = selectedDate && isSameDay(date, selectedDate)
               return (
                 <button
                   key={i}
                   type="button"
-                  disabled={!bookable}
+                  disabled={!selectable}
                   onClick={() => setSelectedDate(date)}
                   aria-pressed={!!isSelected}
                   className={cn(
                     "aspect-square rounded-full text-sm transition-colors",
-                    !bookable && "text-muted-foreground/40",
-                    bookable && !isSelected && "bg-primary/10 font-medium text-primary hover:bg-primary/20",
+                    !selectable && "text-muted-foreground/40",
+                    selectable && !isSelected && "bg-primary/10 font-medium text-primary hover:bg-primary/20",
                     isSelected && "bg-primary font-medium text-primary-foreground"
                   )}
                 >
@@ -204,59 +202,94 @@ export function TourBooking() {
             })}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Highlighted dates are Wednesdays, Saturdays, and Sundays — tours run 5–6 PM.
+            Highlighted dates are Saturdays — Volunteer Day runs 9–11 AM.
           </p>
         </div>
 
         <div className="rounded-xl border border-border p-4">
           <p className="font-medium">
-            {selectedDate ? `${formatDate(selectedDate)} · 5–6 PM` : "Choose a date above"}
+            {selectedDate ? `${formatDate(selectedDate)} · 9–11 AM` : "Choose a Saturday above"}
           </p>
           <div className="mt-4 flex flex-col gap-4">
+            <Stepper label="Adults" hint="18 and older" value={adults} onChange={setAdults} min={0} />
             <Stepper
-              label="Adults"
-              price={ADULT_PRICE}
-              value={adults}
-              onChange={setAdults}
-              min={0}
-              max={MAX_SPOTS - kids}
-            />
-            <Stepper
-              label="Kids (12 & under)"
-              price={CHILD_PRICE}
+              label="Kids"
+              hint="Must be accompanied by an adult"
               value={kids}
               onChange={setKids}
               min={0}
-              max={MAX_SPOTS - adults}
             />
           </div>
-          <div className="mt-4 flex items-center justify-between border-t border-border pt-4 font-medium">
-            <span>Total</span>
-            <span>${total}</span>
-          </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {adults + kids}/{MAX_SPOTS} spots — each tour is capped at {MAX_SPOTS}.
+          <p className="mt-4 text-xs text-muted-foreground">
+            {adults + kids} {adults + kids === 1 ? "person" : "people"} total.
           </p>
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-1.5">
+            <Label htmlFor="rsvp-first-name">First name</Label>
+            <Input id="rsvp-first-name" placeholder="First name" />
+          </div>
+          <div className="grid gap-1.5">
+            <Label htmlFor="rsvp-last-name">Last name</Label>
+            <Input id="rsvp-last-name" placeholder="Last name" />
+          </div>
+        </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="rsvp-email">Email</Label>
+          <Input id="rsvp-email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <Separator />
+
+        <div className="flex flex-col gap-4">
+          <div className="group/field-label flex items-start gap-3">
+            <Checkbox
+              id="rsvp-waiver"
+              checked={agreedToWaiver}
+              onCheckedChange={setAgreedToWaiver}
+              className="mt-0.5"
+            />
+            <Label htmlFor="rsvp-waiver" className="font-normal text-muted-foreground">
+              I agree to follow sanctuary staff instructions and animal-safety guidelines at all
+              times, and to the sanctuary&apos;s liability waiver.{" "}
+              <span className="text-xs italic">
+                (Real waiver language pending legal review — see Policies/Volunteer Policy.md.)
+              </span>
+            </Label>
+          </div>
+
+          <div className="group/field-label flex items-start gap-3">
+            <Checkbox
+              id="rsvp-newsletter"
+              checked={subscribeToNewsletter}
+              onCheckedChange={setSubscribeToNewsletter}
+              className="mt-0.5"
+            />
+            <Label htmlFor="rsvp-newsletter" className="font-normal text-muted-foreground">
+              Keep me posted on sanctuary news, events, and volunteer opportunities.
+            </Label>
+          </div>
+        </div>
+
         <Alert>
-          <AlertTitle>Booking isn&apos;t connected yet</AlertTitle>
+          <AlertTitle>Preview only</AlertTitle>
           <AlertDescription>
-            This is a preview of the booking flow with our real schedule and pricing — no
-            payment processor is wired up yet, so nothing will be charged. Reach out below to
-            reserve your spot in the meantime.
+            This form doesn&apos;t submit anywhere yet — no account or payment is involved,
+            volunteering is always free. We just want to plan for headcount and get waivers signed
+            ahead of time once this is connected.
           </AlertDescription>
         </Alert>
 
         <Button
           size="lg"
-          disabled
-          title="Online booking isn't connected yet"
+          disabled={!selectedDate || !agreedToWaiver}
+          title="RSVPs aren't connected yet"
           className="w-full sm:w-fit"
         >
           {selectedDate && adults + kids > 0
-            ? `Book ${adults + kids} ${adults + kids === 1 ? "spot" : "spots"} — Coming Soon`
-            : "Book Now — Coming Soon"}
+            ? `RSVP for ${adults + kids} ${adults + kids === 1 ? "person" : "people"} — Coming Soon`
+            : "RSVP — Coming Soon"}
         </Button>
       </CardContent>
     </Card>

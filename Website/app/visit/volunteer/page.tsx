@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
+import { VolunteerDayRsvp } from "./volunteer-day-rsvp"
 
 export const metadata: Metadata = {
   title: "Volunteer",
@@ -44,14 +45,15 @@ export default function VolunteerPage() {
 
           <h2 className="mt-6 text-xl font-semibold">Every Saturday, 9–11 AM</h2>
           <p className="mt-3 text-muted-foreground">
-            No sign-up needed — just show up. We start with a quick safety orientation, then spend
-            most of the morning on chores like cleaning coops, scrubbing water bowls, and mucking,
-            depending on what the day calls for. We save the last 20 minutes or so to visit with
-            the animals.
+            Just show up — no registration required. We start with a quick safety orientation,
+            then spend most of the morning on chores like cleaning coops, scrubbing water bowls,
+            and mucking, depending on what the day calls for. We save the last 20 minutes or so to
+            visit with the animals.
           </p>
           <p className="mt-3 text-muted-foreground">
             Volunteer Day is open to all ages, so it&apos;s a great option for families — just make
-            sure kids are accompanied by an adult.
+            sure kids are accompanied by an adult. RSVPing below is optional, but it helps us plan
+            for headcount and lets you sign the waiver ahead of time.
           </p>
 
           <Alert className="mt-6">
@@ -64,6 +66,8 @@ export default function VolunteerPage() {
               to coordinate a business or group volunteer day.
             </AlertDescription>
           </Alert>
+
+          <VolunteerDayRsvp />
         </TabsContent>
 
         <TabsContent value="shifts" className="mt-6">

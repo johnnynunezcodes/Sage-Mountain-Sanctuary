@@ -4,7 +4,9 @@
 
 ## Program concept
 
-Weekly volunteer opportunities run every Saturday (see `Programs/Volunteer Days.md`).
+Weekly volunteer opportunities run every Saturday (see `Programs/Volunteer Days.md`). Volunteering is always free — there's no charge or payment flow involved.
+
+As of 2026-08-19, `/visit/volunteer` has an RSVP-preview widget for Volunteer Day (`Website/app/visit/volunteer/volunteer-day-rsvp.tsx`, modeled on the tour-booking widget — see `Programs/Guided Tours.md`): pick an upcoming Saturday from a calendar, set adult/kid headcount, enter name/email, check a box agreeing to the (placeholder) waiver text below, and optionally opt into the newsletter. Nothing submits yet — it's there to document the intended flow (headcount planning + waiver + newsletter opt-in) ahead of a real backend.
 
 ## Still needed before this goes live
 

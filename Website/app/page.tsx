@@ -5,7 +5,6 @@ import { CalendarDays, HandHeart, PawPrint } from "lucide-react"
 import { animals } from "@/lib/data/animals"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AnimalCard } from "@/components/animal-card"
 
 export default function Home() {
@@ -47,14 +46,6 @@ export default function Home() {
             />
           </div>
         </div>
-
-        <Alert className="mt-10">
-          <AlertTitle>This site is an early draft</AlertTitle>
-          <AlertDescription>
-            Pages are being built out one at a time — copy, photos, and the donation/event
-            payment flows are all placeholders for now.
-          </AlertDescription>
-        </Alert>
       </section>
 
       <section className="border-y border-border bg-muted/30 py-16">

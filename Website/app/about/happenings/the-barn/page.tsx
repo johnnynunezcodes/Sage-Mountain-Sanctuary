@@ -1,7 +1,17 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Mail } from "lucide-react"
+import {
+  ArrowLeft,
+  Mail,
+  HeartPulse,
+  Gauge,
+  TrendingUp,
+  GraduationCap,
+  Users,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
@@ -21,30 +31,36 @@ const costBreakdown = [
 
 const costTotal = "$1,524,006.88"
 
-const whyItems = [
+const whyItems: { title: string; body: string; icon: LucideIcon }[] = [
   {
     title: "Animal Welfare",
     body: "An upgraded shelter is essential for winter well-being, preventing issues like hoof rot and keeping animals safe. It's also crucial that we have a designated vet care and quarantine stall that can be used as needed for new residents when they arrive or if emergencies arise.",
+    icon: HeartPulse,
   },
   {
     title: "Operational Efficiency",
     body: "A barn will streamline tasks such as feeding and medical care, and also offer essential amenities like a bathroom and breakroom for volunteers.",
+    icon: Gauge,
   },
   {
     title: "Expansion and Growth",
     body: "Building a barn would allow us to rescue and care for more animals while also serving as a versatile venue for events throughout the year, including Wine Down Yoga, dinners, fundraisers, and even weddings!",
+    icon: TrendingUp,
   },
   {
     title: "Educational Opportunities",
     body: "A well-maintained barn can serve as a venue for various events, providing opportunities to educate people about our mission.",
+    icon: GraduationCap,
   },
   {
     title: "Community Impact",
     body: "The Barn will serve as a venue for events and programs that would help bring people together, enhancing community spirit and awareness.",
+    icon: Users,
   },
   {
     title: "Long Term Sustainability",
     body: "A well-built barn contributes to the long-term success and stability of the nonprofit's operations.",
+    icon: Leaf,
   },
 ]
 
@@ -58,19 +74,19 @@ const testimonials = [
   {
     quote:
       "I often miss doing yoga at Sage Mountain during the winter season. Having a space like The Barn will allow for them to host their Wine Down Yoga classes all year instead of just when it's nice outside.",
-    attribution: "Regular Yoga Attendee",
+    attribution: "Visitor",
     image: "/images/volunteers/yoga-group.jpg",
   },
   {
     quote:
       "The Barn will be perfect for the rescued animal residents to stay out of the heat when it gets really hot in the summer.",
-    attribution: "Sage Mountain Volunteer",
+    attribution: "Volunteer",
     image: "/images/volunteers/Volunteer-Kylie.jpg",
   },
   {
     quote:
       "There's been times in the winter where the fence to the main yard gets buried in snow. So we put a temporary fence on top of that fence. And then that fence gets buried in snow too. The Barn would prevent that from being problematic since everyone can stay indoors when it's bad outside.",
-    attribution: "Regular Feeding Volunteer",
+    attribution: "Volunteer",
     image: "/images/volunteers/Regular-Volunteer.jpg",
   },
 ]
@@ -89,16 +105,19 @@ export default function TheBarnPage() {
       <Alert className="mt-6">
         <AlertTitle>Real capital project, pulled from the live site</AlertTitle>
         <AlertDescription>
-          The copy, cost breakdown, quotes, and testimonial photos below are real, pulled from
-          sagemtn.org/thebarn. The hero shot and elevation drawing are still placeholders — swap
-          those in once they&apos;re on hand.
+          The copy, cost breakdown, quotes, testimonial photos, site plan, and elevation drawings
+          below are all real.
         </AlertDescription>
       </Alert>
 
-      <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl">
-        <div className="flex h-full w-full items-center justify-center bg-muted text-center text-sm text-muted-foreground">
-          Photo of the barn site under snow coming soon
-        </div>
+      <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl bg-muted">
+        <Image
+          src="/images/barn/the-barn-plans.jpg"
+          alt="Site plan for the new barn, showing the building footprint, drive pads, and Frosty Lane"
+          fill
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="object-cover"
+        />
       </div>
 
       <h1 className="mt-6 text-3xl font-semibold sm:text-4xl">The Barn at Sage Mountain</h1>
@@ -126,10 +145,14 @@ export default function TheBarnPage() {
           animals as needed.
         </p>
 
-        <div className="relative mt-6 aspect-video overflow-hidden rounded-xl">
-          <div className="flex h-full w-full items-center justify-center bg-muted text-center text-sm text-muted-foreground">
-            Barn elevation drawings coming soon
-          </div>
+        <div className="relative mt-6 aspect-video overflow-hidden rounded-xl bg-white">
+          <Image
+            src="/images/barn/barn-side-perspectives.jpg"
+            alt="Architectural elevation drawings of the barn's southwest, northwest, and northeast sides"
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-contain"
+          />
         </div>
       </section>
 
@@ -139,9 +162,14 @@ export default function TheBarnPage() {
         </h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {whyItems.map((item) => (
-            <div key={item.title}>
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{item.body}</p>
+            <div key={item.title} className="flex gap-3">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <item.icon className="size-4.5" aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="font-semibold">{item.title}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">{item.body}</p>
+              </div>
             </div>
           ))}
         </div>

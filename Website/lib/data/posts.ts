@@ -27,17 +27,18 @@ export const posts: SanctuaryPost[] = [
     date: "Capital project · targeting Fall 2025 completion",
     featured: true,
     href: "/about/happenings/the-barn",
+    image: "/images/barn/goat-inside-barn.jpg",
     excerpt:
       "Winters here now bring snow drifts over 10 feet deep. We're building a 7,000 sq ft barn to shelter our 40+ rescued animals from harsh winters and hot summers — see the full plan, cost breakdown, and how to help.",
   },
   {
-    slug: "welcome-to-sanctuary-happenings",
-    title: "Welcome to Sanctuary Happenings",
-    date: "August 2026",
+    slug: "in-loving-memory-of-smooch",
+    title: "In Loving Memory of Smooch",
+    date: "July 6, 2026",
+    href: "/about/happenings/in-loving-memory-of-smooch",
+    image: "/images/smooch/smooch-listing.jpg",
     excerpt:
-      "Placeholder post — this is where we'll share rescue stories, project updates, and news from the sanctuary. Replace with a real first post.",
-    body:
-      "Placeholder post — this is where we'll share rescue stories, project updates, and news from the sanctuary, the same way Sanctuary Happenings works on other rescue websites. Once we have real updates to post, this placeholder should be replaced or removed.",
+      "With a heavy heart, we announce that our baby boy Smooch is no longer with us — remembering seven wonderful years of his love and gentleness at Sage Mountain.",
   },
   {
     slug: "example-new-resident",

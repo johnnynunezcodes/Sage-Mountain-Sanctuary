@@ -23,7 +23,7 @@ export default function TourPage() {
 
       <div className="relative mt-8 aspect-3/2 overflow-hidden rounded-xl">
         <Image
-          src="/images/staff/Alyssa/Alyssa-Peter-Headkiss.jpg"
+          src="/images/Staff/Alyssa/Alyssa-Peter-Headkiss.jpg"
           alt="A team member kneeling with her arms around one of the sanctuary's sheep, with mountains in the background"
           fill
           sizes="(min-width: 768px) 768px, 100vw"
