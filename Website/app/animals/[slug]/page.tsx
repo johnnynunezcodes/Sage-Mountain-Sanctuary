@@ -161,31 +161,6 @@ export default async function AnimalPage({
           <span className="text-sm font-semibold">~${totalMonthlyCareCost}/month</span>
         </div>
       </div>
-
-      <Separator className="my-10" />
-
-      <div>
-        <h2 className="text-lg font-semibold">More photos</h2>
-        {photos.length > 1 ? (
-          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {photos.slice(1).map((photo, index) => (
-              <div key={photo} className="relative aspect-square overflow-hidden rounded-lg">
-                <Image
-                  src={photo}
-                  alt={`${animal.name}, photo ${index + 2}`}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-2 text-sm text-muted-foreground">
-            More photos of {animal.name} are coming soon.
-          </p>
-        )}
-      </div>
     </div>
   )
 }
