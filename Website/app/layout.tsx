@@ -27,12 +27,19 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sage-mountain-sanctuary.vercel.app"),
   title: {
     default: "Sage Mountain Sanctuary",
     template: "%s · Sage Mountain Sanctuary",
   },
   description:
     "Sage Mountain Sanctuary is a nonprofit animal sanctuary near Park City, Utah, providing lifelong refuge for rescued farm animals.",
+  openGraph: {
+    title: "Sage Mountain Sanctuary",
+    description:
+      "Sage Mountain Sanctuary is a nonprofit animal sanctuary near Park City, Utah, providing lifelong refuge for rescued farm animals.",
+    siteName: "Sage Mountain Sanctuary",
+  },
 }
 
 export default function RootLayout({
