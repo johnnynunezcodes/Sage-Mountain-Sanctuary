@@ -64,15 +64,26 @@ export function EventsCalendar({ events }: { events: SanctuaryEvent[] }) {
     [events]
   )
 
-  // Default the visible month to whichever month holds the next upcoming
-  // one-off event, so the calendar doesn't open on an empty month.
+  // Default the visible month to the current month whenever it has anything
+  // on it — and thanks to the recurring weekly activities, it basically
+  // always does. Only jump ahead to a future month if the current month is
+  // genuinely empty (no recurring events and no one-off event this month),
+  // so the calendar doesn't open on a blank page.
   const initialMonthOffset = React.useMemo(() => {
+    const hasEventsThisMonth =
+      recurringEvents.length > 0 ||
+      dated.some(
+        (d) =>
+          d.date.getFullYear() === today.getFullYear() && d.date.getMonth() === today.getMonth()
+      )
+    if (hasEventsThisMonth) return 0
+
     const next = dated
       .filter((d) => d.date >= today)
       .sort((a, b) => a.date.getTime() - b.date.getTime())[0]
     const base = next?.date ?? today
     return (base.getFullYear() - today.getFullYear()) * 12 + (base.getMonth() - today.getMonth())
-  }, [dated, today])
+  }, [dated, today, recurringEvents])
 
   const [monthOffset, setMonthOffset] = React.useState(initialMonthOffset)
   const [selectedDate, setSelectedDate] = React.useState<Date>(today)
