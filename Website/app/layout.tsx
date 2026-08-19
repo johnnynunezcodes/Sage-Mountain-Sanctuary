@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Fraunces, Geist_Mono, Inter } from "next/font/google"
+import { Caveat, Fraunces, Geist_Mono, Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -13,6 +13,12 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-heading",
   axes: ["opsz", "SOFT"],
+})
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-script",
+  weight: ["700"],
 })
 
 const fontMono = Geist_Mono({
@@ -43,7 +49,8 @@ export default function RootLayout({
         fontMono.variable,
         "font-sans",
         inter.variable,
-        fraunces.variable
+        fraunces.variable,
+        caveat.variable
       )}
     >
       <body className="flex min-h-svh flex-col">

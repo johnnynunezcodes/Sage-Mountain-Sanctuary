@@ -40,35 +40,27 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-3">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 font-semibold">
+            <div className="flex items-center gap-[9px] font-semibold">
               <Image
-                src="/images/logo-outline.png"
+                src="/images/logo-mark-tight.png"
                 alt="Sage Mountain Sanctuary"
-                width={567}
-                height={358}
-                className="h-9 w-auto dark:hidden"
+                width={614}
+                height={606}
+                className="h-[38px] w-auto dark:hidden"
               />
               <Image
-                src="/images/logo-outline-dark.png"
+                src="/images/logo-badge-dark-tight.png"
                 alt="Sage Mountain Sanctuary"
-                width={567}
-                height={358}
-                className="hidden h-9 w-auto dark:block"
+                width={614}
+                height={606}
+                className="hidden h-[38px] w-auto dark:block"
               />
-              <Image
-                src="/images/sage-mountain-wordmark.png"
-                alt="Sage Mountain"
-                width={501}
-                height={93}
-                className="h-6 w-auto dark:hidden"
-              />
-              <Image
-                src="/images/sage-mountain-wordmark-dark.png"
-                alt="Sage Mountain"
-                width={501}
-                height={93}
-                className="hidden h-6 w-auto dark:block"
-              />
+              <div className="mt-0.5 flex flex-col gap-0.5">
+                <span className="font-heading text-base leading-none font-semibold">Sage Mountain</span>
+                <span className="font-script text-[13px] leading-none text-[#729E8C]">
+                  Health &middot; Planet &middot; Animals
+                </span>
+              </div>
             </div>
             <p className="text-sm text-muted-foreground">
               A 501(c)(3) nonprofit animal sanctuary near Park City, Utah.

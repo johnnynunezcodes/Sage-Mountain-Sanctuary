@@ -52,37 +52,29 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
+        <Link href="/" className="flex items-center gap-[11px] font-semibold">
           <Image
-            src="/images/logo-outline.png"
+            src="/images/logo-mark-tight.png"
             alt="Sage Mountain Sanctuary"
-            width={567}
-            height={358}
-            className="h-11 w-auto dark:hidden"
+            width={614}
+            height={606}
+            className="h-[46px] w-auto dark:hidden"
             priority
           />
           <Image
-            src="/images/logo-outline-dark.png"
+            src="/images/logo-badge-dark-tight.png"
             alt="Sage Mountain Sanctuary"
-            width={567}
-            height={358}
-            className="hidden h-11 w-auto dark:block"
+            width={614}
+            height={606}
+            className="hidden h-[46px] w-auto dark:block"
             priority
           />
-          <Image
-            src="/images/sage-mountain-wordmark.png"
-            alt="Sage Mountain"
-            width={501}
-            height={93}
-            className="h-7 w-auto dark:hidden"
-          />
-          <Image
-            src="/images/sage-mountain-wordmark-dark.png"
-            alt="Sage Mountain"
-            width={501}
-            height={93}
-            className="hidden h-7 w-auto dark:block"
-          />
+          <div className="mt-0.5 flex flex-col gap-0.5">
+            <span className="font-heading text-lg leading-none font-semibold">Sage Mountain</span>
+            <span className="font-script text-[15px] leading-none text-[#729E8C]">
+              Health &middot; Planet &middot; Animals
+            </span>
+          </div>
         </Link>
 
         <div className="hidden lg:flex lg:items-center lg:gap-2">
