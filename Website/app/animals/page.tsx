@@ -2,156 +2,75 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { ChevronDown } from "lucide-react"
 
 import { animals, speciesList } from "@/lib/data/animals"
 import { AnimalCard } from "@/components/animal-card"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
 
 export default function AnimalsPage() {
-  const [filterValues, setFilterValues] = React.useState<string[]>(["all"])
-  const filter = filterValues[0] ?? "all"
+  const [filter, setFilter] = React.useState<string>("all")
 
-  // Which species section is expanded when the "All" filter is active —
-  // only one section is open at a time, accordion-style.
-  const [openSection, setOpenSection] = React.useState<string>(speciesList[0]?.id ?? "")
-  const sectionRefs = React.useRef<Record<string, HTMLDivElement | null>>({})
-  // Set only by handleToggle, right before it changes openSection — this is
-  // what tells the effect below "a user just clicked a section header, go
-  // ahead and scroll." Without this flag the effect can't reliably tell a
-  // real toggle apart from the initial mount: a ref-based "is this the first
-  // render" check gets defeated by React Strict Mode, which double-invokes
-  // effects in development and consumes a naive first-render guard before
-  // the real effect ever runs.
-  const pendingScroll = React.useRef(false)
-
-  function handleToggle(id: string, isOpen: boolean) {
-    pendingScroll.current = true
-    setOpenSection(isOpen ? "" : id)
-  }
-
-  // When a section opens from a click, scroll it to the top of the viewport
-  // (just below the sticky header) instead of leaving it wherever the
-  // accordion layout shift happened to land it.
-  React.useEffect(() => {
-    if (!pendingScroll.current) return
-    pendingScroll.current = false
-    if (!openSection) return
-    sectionRefs.current[openSection]?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
-  }, [openSection])
+  const sidebarItems = [
+    { id: "all", label: "All", count: animals.length },
+    ...speciesList.map((s) => ({
+      id: s.id,
+      label: s.label,
+      count: animals.filter((a) => a.species === s.id).length,
+    })),
+  ]
 
   const visible =
     filter === "all" ? animals : animals.filter((animal) => animal.species === filter)
 
   return (
-    <div>
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <p className="text-sm font-semibold tracking-wide text-primary uppercase">
-          Meet the Animals
-        </p>
-        <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
-          Every animal here has a name and a story
-        </h1>
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+        Meet the Animals
+      </p>
+      <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
+        Every animal here has a name and a story
+      </h1>
 
-        <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl">
-          <Image
-            src="/images/animals/pig/piglets-birthday.jpg"
-            alt="One of the pigs celebrating a birthday with a slice of cake, surrounded by curious chickens"
-            fill
-            sizes="(min-width: 1024px) 1152px, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
+      <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl">
+        <Image
+          src="/images/animals/pig/piglets-birthday.jpg"
+          alt="One of the pigs celebrating a birthday with a slice of cake, surrounded by curious chickens"
+          fill
+          sizes="(min-width: 1024px) 1152px, 100vw"
+          className="object-cover"
+          priority
+        />
       </div>
 
-      <div className="border-y border-border bg-muted/30 py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="text-sm font-semibold tracking-wide text-primary uppercase">
-            Sponsorship
-          </p>
-          <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Sponsor an animal</h2>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Sponsoring an animal means committing to a monthly or bi-weekly gift that goes toward
-            their care — browse by species below and pick who you&apos;d like to support.
-          </p>
+      <div className="mt-8 grid gap-8 md:grid-cols-[200px_1fr] md:items-start">
+        <nav className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-2 md:sticky md:top-20 md:mx-0 md:flex-col md:gap-0.5 md:overflow-visible md:px-0 md:pb-0">
+          {sidebarItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setFilter(item.id)}
+              aria-pressed={filter === item.id}
+              className={cn(
+                "shrink-0 rounded-lg px-3 py-2 text-left text-sm whitespace-nowrap transition-colors md:w-full md:whitespace-normal",
+                filter === item.id
+                  ? "bg-primary/10 font-semibold text-primary"
+                  : "text-muted-foreground hover:bg-muted"
+              )}
+            >
+              <span className="flex items-center justify-between gap-3">
+                <span>{item.label}</span>
+                <span className="text-xs opacity-70">{item.count}</span>
+              </span>
+            </button>
+          ))}
+        </nav>
 
-          <ToggleGroup
-            value={filterValues}
-            onValueChange={(value) => setFilterValues(value.length ? value : ["all"])}
-            variant="outline"
-            className="mt-8 flex-wrap justify-start"
-          >
-            <ToggleGroupItem value="all">
-              All <span className="text-muted-foreground">({animals.length})</span>
-            </ToggleGroupItem>
-            {speciesList.map((s) => (
-              <ToggleGroupItem key={s.id} value={s.id}>
-                {s.label}{" "}
-                <span className="text-muted-foreground">
-                  ({animals.filter((a) => a.species === s.id).length})
-                </span>
-              </ToggleGroupItem>
+        <div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((animal) => (
+              <AnimalCard key={animal.slug} animal={animal} />
             ))}
-          </ToggleGroup>
-
-          {filter === "all" ? (
-            <div className="mt-8 flex flex-col gap-4">
-              {speciesList.map((s) => {
-                const group = animals.filter((animal) => animal.species === s.id)
-                if (group.length === 0) return null
-                const isOpen = openSection === s.id
-
-                return (
-                  <div
-                    key={s.id}
-                    ref={(el) => {
-                      sectionRefs.current[s.id] = el
-                    }}
-                    className="scroll-mt-20 rounded-xl border border-border bg-background"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => handleToggle(s.id, isOpen)}
-                      aria-expanded={isOpen}
-                      className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left"
-                    >
-                      <span className="text-lg font-semibold">
-                        {s.label}
-                        <span className="ml-2 text-sm font-normal text-muted-foreground">
-                          ({group.length})
-                        </span>
-                      </span>
-                      <ChevronDown
-                        aria-hidden="true"
-                        className={cn(
-                          "size-5 shrink-0 text-muted-foreground transition-transform duration-200",
-                          isOpen && "rotate-180"
-                        )}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="grid gap-6 border-t border-border px-4 pt-6 pb-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {group.map((animal) => (
-                          <AnimalCard key={animal.slug} animal={animal} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          ) : (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {visible.map((animal) => (
-                <AnimalCard key={animal.slug} animal={animal} />
-              ))}
-            </div>
-          )}
+          </div>
 
           {visible.length === 0 && (
             <p className="mt-8 text-center text-sm text-muted-foreground">
