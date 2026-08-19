@@ -45,3 +45,4 @@ public/images/**/*.html
 *.mhtml
 ~$*
 
+.vercel
