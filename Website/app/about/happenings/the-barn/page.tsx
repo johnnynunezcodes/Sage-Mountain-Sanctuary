@@ -102,14 +102,6 @@ export default function TheBarnPage() {
         Sanctuary Happenings
       </Link>
 
-      <Alert className="mt-6">
-        <AlertTitle>Real capital project, pulled from the live site</AlertTitle>
-        <AlertDescription>
-          The copy, cost breakdown, quotes, testimonial photos, site plan, and elevation drawings
-          below are all real.
-        </AlertDescription>
-      </Alert>
-
       <div className="relative mt-6 aspect-21/9 overflow-hidden rounded-xl bg-muted">
         <Image
           src="/images/barn/the-barn-plans.jpg"
