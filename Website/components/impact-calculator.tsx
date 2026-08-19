@@ -1,7 +1,10 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { Droplets, Factory, Fish, LandPlot, PawPrint } from "lucide-react"
+
+import { Slider } from "@/components/ui/slider"
 
 // Time slider: linear in months up to a year, then yearly after that.
 const MONTH_STEPS = [
@@ -39,6 +42,14 @@ function formatNumber(n: number) {
 export function ImpactCalculator() {
   const [monthIndex, setMonthIndex] = React.useState(1) // default: 1 month
 
+  // Desktop starts a step further along (2 months) — checked once after mount
+  // so the server-rendered default stays consistent for hydration.
+  React.useEffect(() => {
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      setMonthIndex(2)
+    }
+  }, [])
+
   const months = MONTH_STEPS[monthIndex]
   const days = months * 30
 
@@ -65,23 +76,38 @@ export function ImpactCalculator() {
 
         <div className="mt-8 rounded-xl border border-border bg-muted/30 p-6">
           <div className="flex items-center justify-between gap-4">
-            <label htmlFor="month-slider" className="text-sm font-medium">
-              Time on a vegan diet
-            </label>
+            <span className="text-sm font-medium">Time on a vegan diet</span>
             <span className="text-lg font-semibold text-primary">{monthLabel(months)}</span>
           </div>
-          <input
-            id="month-slider"
-            type="range"
+          <Slider
+            aria-label="Time on a vegan diet"
             min={0}
             max={MONTH_STEPS.length - 1}
             step={1}
-            value={monthIndex}
-            onChange={(e) => setMonthIndex(Number(e.target.value))}
-            className="mt-4 w-full"
-            style={{ accentColor: "var(--primary)" }}
+            value={[monthIndex]}
+            onValueChange={(value) => setMonthIndex(Array.isArray(value) ? value[0] : value)}
+            className="mt-6"
+            thumbClassName="h-8 w-[51px] border-none bg-transparent ring-0 hover:ring-0 focus-visible:ring-0 active:ring-0 lg:h-12 lg:w-[76px]"
+            renderThumb={() => (
+              <>
+                <Image
+                  src="/images/logo-badge-filled-light.png"
+                  alt=""
+                  width={303}
+                  height={192}
+                  className="h-8 w-[51px] object-contain dark:hidden lg:h-12 lg:w-[76px]"
+                />
+                <Image
+                  src="/images/logo-badge-filled.png"
+                  alt=""
+                  width={648}
+                  height={409}
+                  className="hidden h-8 w-[51px] object-contain dark:block lg:h-12 lg:w-[76px]"
+                />
+              </>
+            )}
           />
-          <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+          <div className="mt-4 flex justify-between text-xs text-muted-foreground lg:mt-6">
             <span>0 months</span>
             <span>10 years</span>
           </div>
