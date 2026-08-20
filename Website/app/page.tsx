@@ -81,7 +81,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold">Every animal has a story</h2>
         </div>
 
-        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-3 pb-2">
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-3 pb-2 scroll-pl-4">
           {featured.map((animal) => (
             <div key={animal.slug} className="w-64 shrink-0 snap-start">
               <AnimalCard animal={animal} />
