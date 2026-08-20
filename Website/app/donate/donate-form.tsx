@@ -175,7 +175,12 @@ function SponsorCard({ defaultAnimal }: { defaultAnimal?: string }) {
                       }
                     >
                       <SelectTrigger className="w-full sm:w-64">
-                        <SelectValue placeholder="Choose an animal" />
+                        <SelectValue placeholder="Choose an animal">
+                          {(value: string) => {
+                            const match = animals.find((animal) => animal.slug === value)
+                            return match ? `${match.name} · ${match.speciesLabel}` : value
+                          }}
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent>
                         {animals.map((animal) => (
