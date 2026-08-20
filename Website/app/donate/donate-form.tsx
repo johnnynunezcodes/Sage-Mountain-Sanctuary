@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Plus, X } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 
 import { animals } from "@/lib/data/animals"
@@ -16,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const amounts = ["25", "50", "100", "other"] as const
@@ -108,55 +110,134 @@ function GeneralDonationCard() {
   )
 }
 
+type SponsorRow = {
+  id: string
+  animalSlug: string
+  frequency: string
+}
+
+function makeSponsorRow(animalSlug: string): SponsorRow {
+  return {
+    id: `${animalSlug}-${Math.random().toString(36).slice(2, 8)}`,
+    animalSlug,
+    frequency: "monthly",
+  }
+}
+
 function SponsorCard({ defaultAnimal }: { defaultAnimal?: string }) {
-  const [animalSlug, setAnimalSlug] = React.useState(defaultAnimal ?? animals[0]?.slug)
-  const [frequency, setFrequency] = React.useState("monthly")
-  const selected = animals.find((a) => a.slug === animalSlug)
+  const [rows, setRows] = React.useState<SponsorRow[]>(() => [
+    makeSponsorRow(defaultAnimal ?? animals[0]?.slug ?? ""),
+  ])
+
+  const updateRow = (id: string, patch: Partial<SponsorRow>) => {
+    setRows((prev) => prev.map((row) => (row.id === id ? { ...row, ...patch } : row)))
+  }
+
+  const removeRow = (id: string) => {
+    setRows((prev) => (prev.length > 1 ? prev.filter((row) => row.id !== id) : prev))
+  }
+
+  const addRow = () => {
+    const usedSlugs = new Set(rows.map((row) => row.animalSlug))
+    const nextAnimal = animals.find((animal) => !usedSlugs.has(animal.slug)) ?? animals[0]
+    setRows((prev) => [...prev, makeSponsorRow(nextAnimal?.slug ?? "")])
+  }
+
+  const selectedAnimals = rows
+    .map((row) => animals.find((a) => a.slug === row.animalSlug))
+    .filter((animal): animal is (typeof animals)[number] => Boolean(animal))
+
+  const canAddMore = rows.length < animals.length
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Sponsor an animal</CardTitle>
         <CardDescription>
-          Give an animal ongoing, dedicated support — billed monthly or every two weeks.
+          Give one or more animals ongoing, dedicated support — billed monthly or every two
+          weeks.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
-        <div>
-          <Label className="mb-2 block">Animal</Label>
-          <Select
-            value={animalSlug}
-            onValueChange={(value) => setAnimalSlug(value ?? animals[0]?.slug ?? "")}
-          >
-            <SelectTrigger className="w-full sm:w-64">
-              <SelectValue placeholder="Choose an animal" />
-            </SelectTrigger>
-            <SelectContent>
-              {animals.map((animal) => (
-                <SelectItem key={animal.slug} value={animal.slug}>
-                  {animal.name} · {animal.speciesLabel}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {selected && (
-            <p className="mt-2 text-sm text-muted-foreground">{selected.story}</p>
-          )}
-        </div>
+        {rows.map((row, index) => {
+          const selected = animals.find((a) => a.slug === row.animalSlug)
+          return (
+            <React.Fragment key={row.id}>
+              {index > 0 && <Separator />}
+              <div className="flex flex-col gap-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <Label className="mb-2 block">Animal</Label>
+                    <Select
+                      value={row.animalSlug}
+                      onValueChange={(value) =>
+                        updateRow(row.id, { animalSlug: value ?? row.animalSlug })
+                      }
+                    >
+                      <SelectTrigger className="w-full sm:w-64">
+                        <SelectValue placeholder="Choose an animal" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {animals.map((animal) => (
+                          <SelectItem key={animal.slug} value={animal.slug}>
+                            {animal.name} · {animal.speciesLabel}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {selected && (
+                      <p className="mt-2 text-sm text-muted-foreground">{selected.story}</p>
+                    )}
+                  </div>
+                  {rows.length > 1 && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="mt-6 shrink-0"
+                      onClick={() => removeRow(row.id)}
+                      title={`Remove ${selected?.name ?? "animal"}`}
+                    >
+                      <X className="size-4" />
+                      <span className="sr-only">Remove {selected?.name ?? "animal"}</span>
+                    </Button>
+                  )}
+                </div>
 
-        <div>
-          <Label className="mb-2 block">Billing frequency</Label>
-          <RadioGroup value={frequency} onValueChange={setFrequency} className="flex flex-wrap gap-4">
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="monthly" id="sponsor-freq-monthly" />
-              <Label htmlFor="sponsor-freq-monthly" className="font-normal">Monthly</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="biweekly" id="sponsor-freq-biweekly" />
-              <Label htmlFor="sponsor-freq-biweekly" className="font-normal">Every 2 weeks</Label>
-            </div>
-          </RadioGroup>
-        </div>
+                <div>
+                  <Label className="mb-2 block">Billing frequency</Label>
+                  <RadioGroup
+                    value={row.frequency}
+                    onValueChange={(value) => updateRow(row.id, { frequency: value ?? row.frequency })}
+                    className="flex flex-wrap gap-4"
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="monthly" id={`sponsor-freq-monthly-${row.id}`} />
+                      <Label htmlFor={`sponsor-freq-monthly-${row.id}`} className="font-normal">
+                        Monthly
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="biweekly" id={`sponsor-freq-biweekly-${row.id}`} />
+                      <Label htmlFor={`sponsor-freq-biweekly-${row.id}`} className="font-normal">
+                        Every 2 weeks
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+              </div>
+            </React.Fragment>
+          )
+        })}
+
+        <Button
+          variant="outline"
+          onClick={addRow}
+          disabled={!canAddMore}
+          className="w-full sm:w-fit"
+        >
+          <Plus className="size-4" />
+          Add another animal
+        </Button>
 
         <Alert>
           <AlertTitle>Payments aren&apos;t connected yet</AlertTitle>
@@ -173,7 +254,9 @@ function SponsorCard({ defaultAnimal }: { defaultAnimal?: string }) {
           title="Payment processing isn't connected yet"
           className="w-full sm:w-fit"
         >
-          {selected ? `Sponsor ${selected.name} — Coming Soon` : "Coming Soon"}
+          {selectedAnimals.length > 0
+            ? `Sponsor ${selectedAnimals.map((a) => a.name).join(", ")} — Coming Soon`
+            : "Coming Soon"}
         </Button>
       </CardContent>
     </Card>

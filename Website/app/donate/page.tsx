@@ -15,8 +15,8 @@ export default function DonatePage() {
         Give an animal — or the whole sanctuary — ongoing support
       </h1>
       <p className="mt-4 text-muted-foreground">
-        Choose a general donation to support the sanctuary as a whole, or sponsor one specific
-        animal with a recurring monthly or bi-weekly gift.
+        Choose a general donation to support the sanctuary as a whole, or sponsor one or more
+        animals with a recurring monthly or bi-weekly gift.
       </p>
 
       <div className="mt-8">
